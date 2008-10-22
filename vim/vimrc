@@ -1,0 +1,37 @@
+set nocompatible
+
+set autoindent
+set encoding=utf8
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set modeline
+set modelines=5
+set expandtab
+set list listchars=tab:>-,trail:.
+set tags+=~/cvs/tags
+au FileType make setlocal noexpandtab
+
+set hlsearch
+set incsearch
+set ruler
+set laststatus=2
+set history=50
+set showcmd
+map <F2> :nohlsearch<CR>
+map <F3> :set list!<CR>
+map <F12> :q<CR>
+
+" encodings
+map <F5> :e ++enc=cp1251<CR>
+map <F6> :e ++enc=utf-8<CR>
+map <F7> :e ++enc=koi8-r<CR>
+set pastetoggle=<F8>
+
+augroup BEGIN
+   au! BufRead,BufNewFile *.xsl source ~/etc/vim/ftplugin/xslhelper.vim
+augroup END
+
+filetype plugin on
+syntax on
+

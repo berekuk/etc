@@ -1,0 +1,13 @@
+# vim: syntax=sh
+alias ls='ls -G'
+export LANG='en_US.UTF-8'
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
+if [ -f /opt/local/etc/bash_completion ]; then
+    . /opt/local/etc/bash_completion
+fi
+
+# instead of default xterm-color, which is uncompatible with linux screen
+# commented because of bug with vim double-buffer drawing bug
+#export TERM=xterm
+

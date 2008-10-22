@@ -1,0 +1,11 @@
+# vim: syntax=sh
+
+# enable color support of ls
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+fi
+
+if [ -e /etc/debian_version ]; then
+    . ~/etc/bash/debian
+fi
