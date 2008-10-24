@@ -13,7 +13,7 @@ shopt -s checkwinsize
 # TODO - linux-specific?
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;35m\]$(perl -e '\''$s = qx(git branch 2>/dev/null) or exit; $s =~ m{\* (.*)} and print "[$1]"'\'')\[\033[00m\]\$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
