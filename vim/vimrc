@@ -9,7 +9,6 @@ set modeline
 set modelines=5
 set expandtab
 set list listchars=tab:>-,trail:.
-set tags+=~/cvs/tags
 au FileType make setlocal noexpandtab
 
 set hlsearch
