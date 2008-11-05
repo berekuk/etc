@@ -1,6 +1,5 @@
 # vim: syntax=sh
 alias ls='ls -G'
-export LANG='en_US.UTF-8'
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export BLOCKSIZE=1K # can i set this on linux too? will i get confused by it? (see environ(7) for details)
 
