@@ -39,11 +39,13 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-export PATH=$PATH:~/bin
-export MYSQL_PS1='[\h] \d> '
-export LANG='en_US.UTF-8'
-export LESSCHARSET='utf-8'
-export GREP_OPTIONS='--color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*'
+export PAGER=less               # FreeBSD uses 'more' (TODO - should move it to ~/etc/bash/freebsd?)
+export PATH=$PATH:~/bin         # my scripts
+export MYSQL_PS1='[\h] \d> '    # host and DB in mysql prompt, very helpful
+export LANG='en_US.UTF-8'       # locale (TODO - check if such locale exists)
+export EDITOR='vim'             # default editor everywhere
+export LESSCHARSET='utf-8'      # locale in less
+export GREP_OPTIONS='--color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*' # don't grep in VCS-specific files
 
 if [ -f ~/etc/bash/local ]; then
     . ~/etc/bash/local
