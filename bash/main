@@ -42,10 +42,13 @@ fi
 export PAGER=less               # FreeBSD uses 'more' (TODO - should move it to ~/etc/bash/freebsd?)
 export PATH=$PATH:~/bin         # my scripts
 export MYSQL_PS1='[\h] \d> '    # host and DB in mysql prompt, very helpful
-export LANG='en_US.UTF-8'       # locale (TODO - check if such locale exists)
 export EDITOR='vim'             # default editor everywhere
-export LESSCHARSET='utf-8'      # locale in less
+export LESSCHARSET='utf-8'      # fixing crackozabrs
 export GREP_OPTIONS='--color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*' # don't grep in VCS-specific files
+
+if locale -a | fgrep -q 'en_US.UTF-8'; then
+    export LANG='en_US.UTF-8'
+fi
 
 if [ -f ~/etc/bash/local ]; then
     . ~/etc/bash/local
@@ -71,9 +74,9 @@ Sum()
 {
     awk '{a+=$1}END{print a}'
 }
-
 Col()
 {
     awk '{print $'$1'}'
 }
+# TODO - allow shortcut 'Sum 3' instead of 'Col 3 | Sum'
 
