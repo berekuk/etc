@@ -46,7 +46,9 @@ export EDITOR='vim'             # default editor everywhere
 export LESSCHARSET='utf-8'      # fixing crackozabrs
 export GREP_OPTIONS='--color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*' # don't grep in VCS-specific files
 
-if locale -a | fgrep -q 'en_US.UTF-8'; then
+if locale -a | fgrep -q 'en_US.utf8'; then
+    export LANG='en_US.utf8'
+elif locale -a | fgrep -q 'en_US.UTF-8'; then
     export LANG='en_US.UTF-8'
 fi
 
