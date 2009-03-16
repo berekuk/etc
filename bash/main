@@ -82,3 +82,9 @@ Col()
 }
 # TODO - allow shortcut 'Sum 3' instead of 'Col 3 | Sum'
 
+# cpan installations in ~
+if [ -e ~/perl ]; then
+    PERL5LIB=$PERL5LIB:~/perl/lib/perl/5.8.8:~/perl/lib/perl/5.8.8/auto
+    PATH=$PATH:~/perl/bin
+fi
+
