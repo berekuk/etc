@@ -8,7 +8,8 @@ set softtabstop=4
 set modeline
 set modelines=5
 set expandtab
-set list listchars=tab:>-,trail:.
+set listchars=eol:⁋,tab:↣⇢,trail:·
+set list
 au FileType make setlocal noexpandtab
 
 set hlsearch
