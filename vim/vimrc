@@ -8,7 +8,7 @@ set softtabstop=4
 set modeline
 set modelines=5
 set expandtab
-set listchars=eol:⁋,tab:↣⇢,trail:·
+set listchars=tab:↣⇢,trail:·
 set list
 au FileType make setlocal noexpandtab
 
@@ -31,6 +31,7 @@ set pastetoggle=<F8>
 augroup BEGIN
    au! BufRead,BufNewFile *.xsl source ~/etc/vim/ftplugin/xslhelper.vim
 augroup END
+autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
 filetype plugin on
 syntax on
