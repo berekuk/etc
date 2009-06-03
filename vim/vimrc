@@ -36,3 +36,8 @@ autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 filetype plugin on
 syntax on
 
+if $TERM=='screen'
+   exe "set title titlestring=vim:%f"
+   exe "set title t_ts=\<ESC>k t_fs=\<ESC>\\"
+endif
+
