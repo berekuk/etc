@@ -46,9 +46,10 @@ export EDITOR='vim'             # default editor everywhere
 export LESSCHARSET='utf-8'      # fixing crackozabrs
 export GREP_OPTIONS='--color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*' # don't grep in VCS-specific files
 
-if locale -a | fgrep -q 'en_US.utf8'; then
+locales=`locale -a`
+if echo $locales | fgrep -q 'en_US.utf8'; then
     export LANG='en_US.utf8'
-elif locale -a | fgrep -q 'en_US.UTF-8'; then
+elif echo $locales | fgrep -q 'en_US.UTF-8'; then
     export LANG='en_US.UTF-8'
 fi
 
@@ -57,17 +58,18 @@ if [ -f ~/etc/bash/local ]; then
 fi
 
 # OS-specific
-if [ `uname` = Linux ]; then
+uname=`uname`
+if [ $uname = Linux ]; then
     . ~/etc/bash/linux
 fi
-if [ `uname` = Darwin ]; then
+if [ $uname = Darwin ]; then
     . ~/etc/bash/mac
 fi
 
-if (which dnsdomainname >/dev/null) && [ \( x`dnsdomainname` = xyandex.ru \) -o \( x`dnsdomainname` = xfeeds.yandex.net \) ]; then
+if (type dnsdomainname 2>/dev/null >/dev/null) && [ \( x`dnsdomainname` = xyandex.ru \) -o \( x`dnsdomainname` = xfeeds.yandex.net \) ]; then
     . ~/etc/bash/yandex
 fi
-if (which domainname >/dev/null) && [ \( x`domainname` = xyandex.ru \) -o \( x`domainname` = xfeeds.yandex.net \) ]; then
+if (type domainname 2>/dev/null >/dev/null) && [ \( x`domainname` = xyandex.ru \) -o \( x`domainname` = xfeeds.yandex.net \) ]; then
     . ~/etc/bash/yandex
 fi
 
