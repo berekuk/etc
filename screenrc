@@ -5,9 +5,6 @@ defutf8 on
 # настройка режим управления потоком окна.
 defflow on
 
-# включает login-режим (для обновления /var/run/utmp)
-#deflogin on
-
 # выключает использование или эмуляцию hardstatus-строки терминала
 # хотя можно использовать вместо caption
 hardstatus off
@@ -38,8 +35,6 @@ defbce on
 autodetach on
 # поддержка alternate screen, типо отчистка экрана при выходе из манов и пр.
 altscreen on
-# как же мы без скринсейвера
-idle 30 eval "screen cmatrix -f -o -u 10" "idle 0"
 # вешаем ^a + на увеличение окон на 3 и ^a - на уменьшение на 1
 bind + resize +3
 bind - resize -1
