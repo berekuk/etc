@@ -63,6 +63,7 @@ use warnings;
 1;
 §%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == comment.file-description-t == start ==
+#!/usr/bin/perl
 
 use strict;
 use warnings;
