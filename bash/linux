@@ -1,4 +1,4 @@
-# vim: syntax=sh
+# vim: ft=sh
 
 # enable color support of ls
 if [ "$TERM" != "dumb" ]; then

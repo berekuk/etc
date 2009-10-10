@@ -1,8 +1,8 @@
-# vim: syntax=sh
-alias ls='ls -G'
+# vim: ft=sh
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 export BLOCKSIZE=1K # can i set this on linux too? will i get confused by it? (see environ(7) for details)
+export CLICOLOR=1
 
 if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion

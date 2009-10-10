@@ -1,4 +1,4 @@
-# vim: syntax=sh
+# vim: ft=sh
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -25,17 +25,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
-
-# git aliases
-alias gst='git status'
-alias gc='git commit'
-alias gd='git diff'
-alias ga='git add'
 
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
@@ -88,7 +77,7 @@ Col()
 
 # cpan installations in ~
 if [ -e ~/perl ]; then
-    export PERL5LIB=$PERL5LIB:~/perl/lib/perl/5.8.8:~/perl/lib/perl/5.8.8/auto:~/perl/share/perl/5.8.8
+    export PERL5LIB=$PERL5LIB:~/perl/lib/perl/5.8.8:~/perl/lib/perl/5.8.8/auto:~/perl/share/perl/5.8.8 # TODO - configurable version
     export PATH=$PATH:~/perl/bin
 fi
 export FTP_PASSIVE=1 # always useful when using cpan

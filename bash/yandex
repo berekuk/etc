@@ -1,7 +1,3 @@
-# vim: syntax=sh
-export CVS_RSH='ssh'
-export CVSROOT=':ext:mmcleric@tree.yandex.ru:/opt/CVSROOT'
+# vim: ft=sh
 export DEBEMAIL=mmcleric@yandex-team.ru
 export DEBFULLNAME='Vyacheslav Matjukhin (No comments)'
-
-alias ddd='debuild && debcommit && debrelease -f'
