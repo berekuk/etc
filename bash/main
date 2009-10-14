@@ -77,8 +77,10 @@ Col()
 
 # cpan installations in ~
 if [ -e ~/perl ]; then
-    export PERL5LIB=$PERL5LIB:~/perl/lib/perl/5.8.8:~/perl/lib/perl/5.8.8/auto:~/perl/share/perl/5.8.8 # TODO - configurable version
+    export PERL5LIB=$PERL5LIB:~/perl/lib/perl/5.8.8:~/perl/lib/perl/5.8.8/auto:~/perl/share/perl/5.8.8:~/perl/share/perl/5.8:~/perl/lib/perl/5.8 # TODO - configurable version
     export PATH=$PATH:~/perl/bin
 fi
 export FTP_PASSIVE=1 # always useful when using cpan
+
+. ~/etc/bash/aliases
 
