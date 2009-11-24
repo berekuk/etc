@@ -44,10 +44,6 @@ elif echo $locales | fgrep -q 'en_US.UTF-8'; then
     export LANG='en_US.UTF-8'
 fi
 
-if [ -f ~/etc/bash/local ]; then
-    . ~/etc/bash/local
-fi
-
 # OS-specific
 uname=`uname`
 if [ $uname = Linux ]; then
@@ -83,4 +79,8 @@ fi
 export FTP_PASSIVE=1 # always useful when using cpan
 
 . ~/etc/bash/aliases
+
+if [ -f ~/etc/bash/local ]; then
+    . ~/etc/bash/local
+fi
 
