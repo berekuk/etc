@@ -53,10 +53,10 @@ if [ $uname = Darwin ]; then
     . ~/etc/bash/mac
 fi
 
-if (type dnsdomainname 2>/dev/null >/dev/null) && [ \( x`dnsdomainname` = xyandex.ru \) -o \( x`dnsdomainname` = xfeeds.yandex.net \) ]; then
+if (type dnsdomainname 2>/dev/null >/dev/null) && [[ `dnsdomainname` =~ ^(yandex\.ru|yandex-team\.ru|feeds\.yandex\.net)$  ]]; then
     . ~/etc/bash/yandex
 fi
-if (type domainname 2>/dev/null >/dev/null) && [ \( x`domainname` = xyandex.ru \) -o \( x`domainname` = xfeeds.yandex.net \) ]; then
+if (type domainname 2>/dev/null >/dev/null) && [[ `domainname` =~ ^(yandex\.ru|yandex-team\.ru|feeds\.yandex\.net)$ ]]; then
     . ~/etc/bash/yandex
 fi
 
@@ -73,7 +73,7 @@ Col()
 
 # cpan installations in ~
 if [ -e ~/perl ]; then
-    export PERL5LIB=$PERL5LIB:~/perl/lib/perl/5.8.8:~/perl/lib/perl/5.8.8/auto:~/perl/share/perl/5.8.8:~/perl/share/perl/5.8:~/perl/lib/perl/5.8 # TODO - configurable version
+    export PERL5LIB=$PERL5LIB:~/perl/lib/perl/5.8.9:~/perl/lib/perl/5.8.9/auto:~/perl/share/perl/5.8.9:~/perl/share/perl/5.8:~/perl/lib/perl/5.8 # TODO - configurable version
     export PATH=$PATH:~/perl/bin
 fi
 export FTP_PASSIVE=1 # always useful when using cpan
