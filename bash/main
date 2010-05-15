@@ -52,10 +52,10 @@ if [ $uname = Darwin ]; then
     . ~/etc/bash/mac
 fi
 
-if (type dnsdomainname 2>/dev/null >/dev/null) && [[ `dnsdomainname` =~ '^(yandex\.ru|yandex-team\.ru|feeds\.yandex\.net)$'  ]]; then
+if (type dnsdomainname 2>/dev/null >/dev/null) && [[ `dnsdomainname` =~ ^(yandex\.ru|yandex-team\.ru|feeds\.yandex\.net)$  ]]; then
     . ~/etc/bash/yandex
 fi
-if (type domainname 2>/dev/null >/dev/null) && [[ `domainname` =~ '^(yandex\.ru|yandex-team\.ru|feeds\.yandex\.net)$' ]]; then
+if (type domainname 2>/dev/null >/dev/null) && [[ `domainname` =~ ^(yandex\.ru|yandex-team\.ru|feeds\.yandex\.net)$ ]]; then
     . ~/etc/bash/yandex
 fi
 
