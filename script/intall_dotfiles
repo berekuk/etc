@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+cd
+for file in etc/dotfiles/*; do
+    name=`basename $file`
+    rm -f ~/.$name
+    ln -s $file ~/.$name
+done

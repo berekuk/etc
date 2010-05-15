@@ -33,7 +33,6 @@ fi
 export PATH=$PATH:~/bin         # my scripts
 export MYSQL_PS1='[\h] \d> '    # host and DB in mysql prompt, very helpful
 export EDITOR='vim'             # default editor everywhere
-export SCREENRC=~/etc/screenrc  # custom screenrc config
 export LESSCHARSET='utf-8'      # fixing crackozabrs
 export GREP_OPTIONS='--color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*' # don't grep in VCS-specific files
 

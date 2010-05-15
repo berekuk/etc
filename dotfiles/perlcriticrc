@@ -1,0 +1,182 @@
+# vim: ft=conf
+only = 1
+severity = 3
+verbose = [%p] %f: %m at line %l, column %c.  %e.  (Severity: %s)\n
+[BuiltinFunctions::ProhibitSleepViaSelect]
+severity = 3
+[BuiltinFunctions::ProhibitUniversalCan]
+severity = 3
+[BuiltinFunctions::ProhibitUniversalIsa]
+severity = 3
+[BuiltinFunctions::ProhibitVoidGrep]
+severity = 3
+[BuiltinFunctions::ProhibitVoidMap]
+severity = 3
+[BuiltinFunctions::RequireBlockMap]
+severity = 3
+[BuiltinFunctions::RequireGlobFunction]
+severity = 3
+[ClassHierarchies::ProhibitExplicitISA]
+severity = 3
+[ClassHierarchies::ProhibitOneArgBless]
+severity = 3
+[CodeLayout::ProhibitHardTabs]
+severity = 3
+[CodeLayout::ProhibitQuotedWordLists]
+severity = 3
+[CodeLayout::ProhibitTrailingWhitespace]
+severity = 3
+[CodeLayout::RequireConsistentNewlines]
+severity = 3
+[CodeLayout::RequireTrailingCommas]
+severity = 3
+[ControlStructures::ProhibitCStyleForLoops]
+severity = 3
+[ControlStructures::ProhibitDeepNests]
+severity = 3
+[ControlStructures::ProhibitLabelsWithSpecialBlockNames]
+severity = 3
+[ControlStructures::ProhibitMutatingListFunctions]
+severity = 3
+[ControlStructures::ProhibitNegativeExpressionsInUnlessAndUntilConditions]
+severity = 3
+[ControlStructures::ProhibitUnreachableCode]
+severity = 3
+[Documentation::PodSpelling]
+severity = 1
+stop_words_file = /home/mmcleric/.perlcritic_stopwords
+[Documentation::RequirePackageMatchesPodName]
+severity = 3
+[Documentation::RequirePodSections]
+severity = 2
+lib_sections    = NAME | SYNOPSIS
+script_sections = NAME | SYNOPSIS
+[ErrorHandling::RequireCheckingReturnValueOfEval]
+severity = 3
+[InputOutput::ProhibitBacktickOperators]
+severity = 3
+[InputOutput::ProhibitBarewordFileHandles]
+severity = 3
+[InputOutput::ProhibitJoinedReadline]
+severity = 3
+[InputOutput::ProhibitOneArgSelect]
+severity = 3
+[InputOutput::ProhibitReadlineInForLoop]
+severity = 3
+[InputOutput::ProhibitTwoArgOpen]
+severity = 3
+[InputOutput::RequireBracedFileHandleWithPrint]
+severity = 3
+[InputOutput::RequireCheckedSyscalls]
+severity = 3
+functions = open close opendir readdir closedir system
+[Miscellanea::ProhibitFormats]
+severity = 3
+[Miscellanea::ProhibitUnrestrictedNoCritic]
+severity = 3
+[Miscellanea::ProhibitUselessNoCritic]
+severity = 3
+[Modules::ProhibitAutomaticExportation]
+severity = 2
+[Modules::ProhibitEvilModules]
+severity = 3
+modules = PPB::Shell PPB::Logger /^PPB::Zabbix::/
+[Modules::ProhibitExcessMainComplexity]
+severity = 3
+max_mccabe = 20
+[Modules::ProhibitMultiplePackages]
+severity = 3
+[Modules::RequireEndWithOne]
+severity = 4
+[Modules::RequireExplicitPackage]
+severity = 3
+[Modules::RequireFilenameMatchesPackage]
+severity = 4
+[Modules::RequireNoMatchVarsWithUseEnglish]
+severity = 4
+[Objects::ProhibitIndirectSyntax]
+severity = 3
+[RegularExpressions::ProhibitCaptureWithoutTest]
+severity = 3
+[RegularExpressions::ProhibitComplexRegexes]
+severity = 2
+[RegularExpressions::ProhibitFixedStringMatches]
+severity = 2
+[RegularExpressions::ProhibitSingleCharAlternation]
+severity = 3
+[RegularExpressions::ProhibitUnusedCapture]
+severity = 3
+[Subroutines::ProhibitAmpersandSigils]
+severity = 3
+[Subroutines::ProhibitBuiltinHomonyms]
+severity = 2
+[Subroutines::ProhibitExcessComplexity]
+severity = 2
+max_mccabe = 30
+[Subroutines::ProhibitExplicitReturnUndef]
+severity = 4
+[Subroutines::ProhibitManyArgs]
+severity = 3
+max_arguments = 4
+[Subroutines::ProhibitNestedSubs]
+severity = 3
+[Subroutines::ProhibitReturnSort]
+severity = 3
+[Subroutines::ProtectPrivateSubs]
+severity = 3
+[Subroutines::RequireFinalReturn]
+severity = 1
+[TestingAndDebugging::ProhibitProlongedStrictureOverride]
+severity = 3
+statements = 10
+[TestingAndDebugging::RequireTestLabels]
+severity = 2
+[TestingAndDebugging::RequireUseStrict]
+severity = 4
+[ValuesAndExpressions::ProhibitCommaSeparatedStatements]
+severity = 4
+[ValuesAndExpressions::ProhibitConstantPragma]
+severity = 3
+[ValuesAndExpressions::ProhibitEscapedCharacters]
+severity = 3
+[ValuesAndExpressions::ProhibitLeadingZeros]
+severity = 4
+[ValuesAndExpressions::ProhibitMagicNumbers]
+severity = 1
+# TODO - exclude tests
+# useless now, but will be used when Morpheus will be implemented
+[ValuesAndExpressions::ProhibitMismatchedOperators]
+severity = 1
+[ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters]
+severity = 4
+[ValuesAndExpressions::ProhibitSpecialLiteralHeredocTerminator]
+severity = 5
+[ValuesAndExpressions::RequireInterpolationOfMetachars]
+severity = 2
+[ValuesAndExpressions::RequireNumberSeparators]
+severity = 2
+[ValuesAndExpressions::RequireQuotedHeredocTerminator]
+severity = 3
+[ValuesAndExpressions::RequireUpperCaseHeredocTerminator]
+severity = 3
+[Variables::ProhibitConditionalDeclarations]
+severity = 4
+# TODO - allow 'our'?
+[Variables::ProhibitPackageVars]
+severity = 2
+[Variables::ProhibitPerl4PackageNames]
+severity = 5
+[Variables::ProhibitReusedNames]
+severity = 3
+[Variables::ProhibitUnusedVariables]
+severity = 3
+[Variables::ProtectPrivateVars]
+severity = 4
+[Variables::RequireInitializationForLocalVars]
+severity = 3
+[Variables::RequireLexicalLoopIterators]
+severity = 4
+[Variables::RequireLocalizedPunctuationVars]
+severity = 1
+[Variables::RequireNegativeIndices]
+severity = 3
