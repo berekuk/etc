@@ -55,7 +55,7 @@ fi
 if (type dnsdomainname 2>/dev/null >/dev/null) && dnsdomainname | perl -lne '/^yandex\.ru|yandex-team\.ru|feeds\.yandex\.net$/ or exit 1'; then
     . ~/etc/bash/yandex
 fi
-if (type domainname 2>/dev/null >/dev/null) && dnsdomainname | perl -lne '/^yandex\.ru|yandex-team\.ru|feeds\.yandex\.net$/ or exit 1'; then
+if (type domainname 2>/dev/null >/dev/null) && domainname | perl -lne '/^yandex\.ru|yandex-team\.ru|feeds\.yandex\.net$/ or exit 1'; then
     . ~/etc/bash/yandex
 fi
 
