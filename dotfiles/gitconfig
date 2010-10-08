@@ -11,6 +11,9 @@
     email = mmcleric@yandex-team.ru
 [alias]
     lol = log --pretty=oneline --abbrev-commit --graph --decorate
+	up = pull --rebase
+	wu = log --stat origin..@{0}
+	wup = log -p origin..@{0}
 [pack]
     threads = 0
 [diff]
