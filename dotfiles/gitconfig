@@ -11,3 +11,7 @@
     email = mmcleric@yandex-team.ru
 [alias]
     lol = log --pretty=oneline --abbrev-commit --graph --decorate
+[pack]
+    threads = 0
+[diff]
+    renameLimit = 0
