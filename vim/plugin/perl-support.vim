@@ -936,7 +936,7 @@ function! Perl_SyntaxCheck ()
 		" no whitespaces
     " Errorformat from compiler/perl.vim (VIM distribution).
     "
-    exe ':set makeprg=perl\ -c'
+    exe ':set makeprg=perl\ -Ilib\ -c'
     exe ':setlocal errorformat=
         \%-G%.%#had\ compilation\ errors.,
         \%-G%.%#syntax\ OK,
