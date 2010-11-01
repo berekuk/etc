@@ -12,4 +12,3 @@ alias gd='git diff'
 alias ga='git add'
 
 alias ra='$EDITOR ~/etc/bash/aliases; source ~/etc/bash/aliases'
-alias pc='perlcritic --quiet .'
