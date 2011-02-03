@@ -1,2 +1,5 @@
 # vim: ft=sh
 
+alias sags='sudo apt-get source'
+alias sagi='sudo aptitude install'
+alias sagu='sudo aptitude update'

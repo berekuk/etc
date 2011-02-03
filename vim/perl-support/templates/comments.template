@@ -40,25 +40,12 @@ use warnings;
 
 <CURSOR>
 
-=head1 AUTHOR
-
-|AUTHOR| <|EMAIL|>
-
-=cut
-
 §%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == comment.file-description-pm == start ==
 package <CURSOR>;
 
 use strict;
 use warnings;
-
-
-=head1 AUTHOR
-
-|AUTHOR| <|EMAIL|>
-
-=cut
 
 1;
 §%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

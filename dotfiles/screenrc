@@ -9,7 +9,7 @@ defflow on
 # хотя можно использовать вместо caption
 hardstatus off
 # заголовок, о форматировании заголовка смотреть в мане
-caption always ' %{-b dd}%-w%{cd}%n* %t%{-}%+w %{cd}%-=(%l) %d/%m %c%{-} '
+caption always ' %{-b dd}%-w%{cd}%n* %t%{-}%+w %{cd}%-=%H%{-} '
 
 # включаем визуальный звонок
 vbell on
