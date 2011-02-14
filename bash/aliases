@@ -6,7 +6,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # git aliases
-alias gst='git status'
+alias gst='git status -s'
 alias gc='git commit'
 alias gd='git diff'
 alias ga='git add'
