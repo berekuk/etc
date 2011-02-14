@@ -33,7 +33,6 @@
 §%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == comment.file-description-pl == start ==
 #!/usr/bin/perl
-# |COPYRIGHT|
 
 use strict;
 use warnings;
