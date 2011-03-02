@@ -135,12 +135,12 @@ else
 		let s:Perl_GlobalTemplateDir	= fnamemodify( s:Perl_GlobalTemplateFile, ":p:h" ).'/'
 	else
 		" user installation assumed
-		let s:plugin_dir  						= $HOME.'/.vim/'
+		let s:plugin_dir  						= $HOME.'/etc/vim/'
 	endif
 	"
-	let s:Perl_LocalTemplateFile		= $HOME.'/.vim/perl-support/templates/Templates'
+	let s:Perl_LocalTemplateFile		= s:plugin_dir.'perl-support/templates/Templates'
 	let s:Perl_LocalTemplateDir			= fnamemodify( s:Perl_LocalTemplateFile, ":p:h" ).'/'
-	let s:Perl_CodeSnippets  				= $HOME.'/.vim/perl-support/codesnippets/'
+	let s:Perl_CodeSnippets  				= s:plugin_dir.'perl-support/codesnippets/'
 	let s:escfilename   = ' \%#[]'
 	let s:Perl_Display	= "$DISPLAY"
 	"

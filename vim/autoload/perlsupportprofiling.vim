@@ -42,7 +42,7 @@ else
 		let s:installation	= 'system'
 	else
 		" user installation assumed
-		let s:plugin_dir  	= $HOME.'/.vim/'
+		let s:plugin_dir  	= $HOME.'/etc/vim/'
 	end
 	"
 endif
