@@ -1,8 +1,8 @@
+set runtimepath^=~/etc/vim
 filetype off
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
-set runtimepath^=~/etc/vim
 set nocompatible      " отключаем совместимость с классическим vi
 
 set autoindent           " автоотступы, перенос строки оставляет курсор в той же колонке
