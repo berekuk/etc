@@ -135,7 +135,7 @@ else
 		let s:Perl_GlobalTemplateDir	= fnamemodify( s:Perl_GlobalTemplateFile, ":p:h" ).'/'
 	else
 		" user installation assumed
-		let s:plugin_dir  						= $HOME.'/etc/vim/'
+		let s:plugin_dir  						= $HOME.'/etc/vim/bundle/perl-support/'
 	endif
 	"
 	let s:Perl_LocalTemplateFile		= s:plugin_dir.'perl-support/templates/Templates'

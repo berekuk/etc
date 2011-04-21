@@ -1,3 +1,7 @@
+filetype off
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
+
 set runtimepath^=~/etc/vim
 set nocompatible      " отключаем совместимость с классическим vi
 
@@ -41,11 +45,6 @@ set pastetoggle=<F8>
 " удалить все пробелы на конце строк
 nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
-" подключаем xslhelper для *.xsl файлов
-" не помню когда последний раз пользовался
-augroup BEGIN
-   au! BufRead,BufNewFile *.xsl source ~/etc/vim/ftplugin/xslhelper.vim
-augroup END
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit " правильная подсветка при редактировании коммита после git commit
 
 filetype plugin on " включаем опознавание типов файлов
