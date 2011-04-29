@@ -40,7 +40,7 @@ if  has("win16") || has("win32") || has("win64") || has("win95")
 "  set dictionary=$VIM\vimfiles\wordlists/german.list
 else
   set backupdir =$HOME/.vim.backupdir
-  set dictionary=$HOME/etc/vim/bundle/perl-support/wordlists/german.list,$HOME/.vim/wordlists/english.list
+  set dictionary=$HOME/.vim/wordlists/german.list,$HOME/.vim/wordlists/english.list
 endif
 "
 "-------------------------------------------------------------------------------

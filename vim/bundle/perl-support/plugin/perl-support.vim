@@ -40,7 +40,7 @@
 "
 "        Version:  see variable  g:Perl_Version  below
 "        Created:  09.07.2001
-"        License:  Copyright (c) 2001-2010, Fritz Mehner
+"        License:  Copyright (c) 2001-2011, Fritz Mehner
 "                  This program is free software; you can redistribute it
 "                  and/or modify it under the terms of the GNU General Public
 "                  License as published by the Free Software Foundation,
@@ -51,7 +51,7 @@
 "                  PURPOSE.
 "                  See the GNU General Public License version 2 for more details.
 "        Credits:  see perlsupport.txt
-"       Revision:  $Id: perl-support.vim,v 1.110 2010/11/29 22:22:05 mehner Exp $
+"       Revision:  $Id: perl-support.vim,v 1.116 2011/04/21 07:33:24 mehner Exp $
 "-------------------------------------------------------------------------------
 "
 " Prevent duplicate loading:
@@ -59,7 +59,7 @@
 if exists("g:Perl_Version") || &compatible
   finish
 endif
-let g:Perl_Version= "4.9"
+let g:Perl_Version= "4.11"
 "
 "#################################################################################
 "
@@ -99,20 +99,20 @@ let s:MSWIN = has("win16") || has("win32")   || has("win64")    || has("win95")
 let s:UNIX	= has("unix")  || has("macunix") || has("win32unix")
 "
 let g:Perl_Installation				= 'local'
-let s:vimfiles						= $VIM
-let	s:sourced_script_file	= expand("<sfile>")
-let s:Perl_GlobalTemplateFile= ''
-let s:Perl_GlobalTemplateDir = ''
+let s:vimfiles								= $VIM
+let	s:sourced_script_file			= expand("<sfile>")
+let s:Perl_GlobalTemplateFile	= ''
+let s:Perl_GlobalTemplateDir	= ''
 "
 if  s:MSWIN
   " ==========  MS Windows  ======================================================
 	"
 	if match( s:sourced_script_file, escape( s:vimfiles, ' \' ) ) == 0
 		" system wide installation
-		let g:Perl_Installation						= 'system'
+		let g:Perl_Installation				= 'system'
 		let s:plugin_dir							= $VIM.'/vimfiles/'
-		let s:Perl_GlobalTemplateFile	= s:plugin_dir.'perl-support/templates/Templates'
-		let s:Perl_GlobalTemplateDir	= fnamemodify( s:Perl_GlobalTemplateFile, ":p:h" ).'/'
+		let s:Perl_GlobalTemplateDir	= s:plugin_dir.'perl-support/templates'
+		let s:Perl_GlobalTemplateFile	= s:Perl_GlobalTemplateDir.'/Templates'
 	else
 		" user installation assumed
 		let s:plugin_dir  						= $HOME.'/vimfiles/'
@@ -127,22 +127,22 @@ if  s:MSWIN
 else
   " ==========  Linux/Unix  ======================================================
 	"
-	if match( expand("<sfile>"), $VIM ) == 0
-		" system wide installation
-		let g:Perl_Installation						= 'system'
-		let s:plugin_dir  						= $VIM.'/vimfiles/'
-		let s:Perl_GlobalTemplateFile	= s:plugin_dir.'perl-support/templates/Templates'
-		let s:Perl_GlobalTemplateDir	= fnamemodify( s:Perl_GlobalTemplateFile, ":p:h" ).'/'
-	else
+	if match( expand("<sfile>"), expand( "$HOME" ) ) == 0
 		" user installation assumed
 		let s:plugin_dir  						= $HOME.'/etc/vim/bundle/perl-support/'
+	else
+		" system wide installation
+		let g:Perl_Installation				= 'system'
+		let s:plugin_dir  						= $VIM.'/vimfiles/'
+		let s:Perl_GlobalTemplateDir	= s:plugin_dir.'perl-support/templates'
+		let s:Perl_GlobalTemplateFile	= s:Perl_GlobalTemplateDir.'/Templates'
 	endif
 	"
 	let s:Perl_LocalTemplateFile		= s:plugin_dir.'perl-support/templates/Templates'
 	let s:Perl_LocalTemplateDir			= fnamemodify( s:Perl_LocalTemplateFile, ":p:h" ).'/'
 	let s:Perl_CodeSnippets  				= s:plugin_dir.'perl-support/codesnippets/'
-	let s:escfilename   = ' \%#[]'
-	let s:Perl_Display	= "$DISPLAY"
+	let s:escfilename   						= ' \%#[]'
+	let s:Perl_Display							= "$DISPLAY"
 	"
   " ==============================================================================
 endif
@@ -216,6 +216,11 @@ call Perl_SetLocalVariable("Perl_Printheader            ")
 call Perl_SetLocalVariable("Perl_ProfilerTimestamp      ")
 call Perl_SetLocalVariable("Perl_TemplateOverwrittenMsg ")
 call Perl_SetLocalVariable("Perl_XtermDefaults          ")
+call Perl_SetLocalVariable("Perl_GlobalTemplateFile     ")
+
+if exists('g:Perl_GlobalTemplateFile') && g:Perl_GlobalTemplateFile != ''
+	let s:Perl_GlobalTemplateDir	= fnamemodify( s:Perl_GlobalTemplateFile, ":h" )
+endif
 "
 "
 " set default geometry if not specified
@@ -914,11 +919,12 @@ function! Perl_Settings ()
   let txt = txt.'                 company  :  "'.s:Perl_Macro['|COMPANY|']."\"\n"
   let txt = txt.'                 project  :  "'.s:Perl_Macro['|PROJECT|']."\"\n"
   let txt = txt.'        copyright holder  :  "'.s:Perl_Macro['|COPYRIGHTHOLDER|']."\"\n"
+  let txt = txt.'  code snippet directory  :  "'.g:Perl_CodeSnippets."\"\n"
 	let txt = txt.'           template style :  "'.s:Perl_Macro['|STYLE|']."\"\n"
-  let txt = txt."  code snippet directory  :  ".g:Perl_CodeSnippets."\n"
+	let txt = txt.'      plugin installation :  "'.g:Perl_Installation."\"\n"
 	" ----- template files  ------------------------
 	if g:Perl_Installation == 'system'
-		let txt = txt.'global template directory :  '.s:Perl_GlobalTemplateDir."\n"
+		let txt = txt.'global template directory :  "'.s:Perl_GlobalTemplateDir."\"\n"
 		if filereadable( s:Perl_LocalTemplateFile )
 			let txt = txt.' local template directory :  '.s:Perl_LocalTemplateDir."\n"
 		endif
@@ -983,7 +989,7 @@ function! Perl_SyntaxCheck ()
 		" no whitespaces
     " Errorformat from compiler/perl.vim (VIM distribution).
     "
-    exe ':set makeprg=perl\ -Ilib\ -c'
+    exe ':set makeprg=perl\ -c'
     exe ':setlocal errorformat=
         \%-G%.%#had\ compilation\ errors.,
         \%-G%.%#syntax\ OK,
@@ -1100,12 +1106,6 @@ function! Perl_Run ()
   silent exe ":update"
   silent exe ":cclose"
   "
-  if  s:MSWIN
-    let l:arguments = substitute( l:arguments, '^\s\+', ' ', '' )
-    let l:arguments = substitute( l:arguments, '\s\+', "\" \"", 'g')
-    let l:switches  = substitute( l:switches, '^\s\+', ' ', '' )
-    let l:switches  = substitute( l:switches, '\s\+', "\" \"", 'g')
-  endif
   "
   "------------------------------------------------------------------------------
   "  run : run from the vim command line
@@ -1150,7 +1150,7 @@ function! Perl_Run ()
       setlocal  modifiable
       silent exe ":update"
       if  s:MSWIN
-        exe ":%!perl ".l:switches.'"'.l:fullname.l:arguments.'"'
+        exe ":%!perl ".l:switches.'"'.l:fullname.'" '.l:arguments
       else
         exe ":%!perl ".l:switches.l:fullname_esc.l:arguments
       endif
@@ -1170,7 +1170,7 @@ function! Perl_Run ()
     "
     if  s:MSWIN
       " same as "vim"
-      exe "!perl \"".l:switches.l:fullname." ".l:arguments."\""
+      exe "!perl ".l:switches.'"'.l:fullname.'" '.l:arguments
     else
       silent exe '!xterm -title '.l:fullname_esc.' '.s:Perl_XtermDefaults.' -e '.s:Perl_Wrapper.' perl '.l:switches.l:fullname_esc.l:arguments
 			:redraw!
@@ -1400,7 +1400,7 @@ function! Perl_RereadTemplates ( msg )
 			if filereadable( s:Perl_GlobalTemplateFile )
 				call Perl_ReadTemplates( s:Perl_GlobalTemplateFile )
 			else
-				echomsg "Global template '.s:Perl_GlobalTemplateFile.' file not readable."
+				echomsg "Global template file '.s:Perl_GlobalTemplateFile.' not readable."
 				return
 			endif
 			let	messsage	= "Templates read from '".s:Perl_GlobalTemplateFile."'"
@@ -1416,7 +1416,7 @@ function! Perl_RereadTemplates ( msg )
 				call Perl_ReadTemplates( s:Perl_LocalTemplateFile )
 				let	messsage	= "Templates read from '".s:Perl_LocalTemplateFile."'"
 			else
-				echomsg "Local template '".s:Perl_LocalTemplateFile."' file not readable." 
+				echomsg "Local template file '".s:Perl_LocalTemplateFile."' not readable." 
 				return
 			endif
 			"
@@ -2216,6 +2216,45 @@ function! Perl_Perlcritic ()
   exe ":cclose"
   silent exe  ":update"
 	"
+	" check for a configuration file
+	"
+	let	perlCriticRcFile			= ''
+	let	perlCriticRcFileUsed	= 'no'
+	if exists("$PERLCRITIC")
+		let	perlCriticRcFile	= $PERLCRITIC
+	elseif filereadable( '.perlcriticrc' )
+		let	perlCriticRcFile	= '.perlcriticrc'
+	elseif filereadable( $HOME.'/.perlcriticrc' )
+		let	perlCriticRcFile	= $HOME.'/.perlcriticrc'
+	endif
+	"
+	" read severity and/or verbosity from the configuration file if specified
+	"
+	if perlCriticRcFile != ''
+		for line in readfile(perlCriticRcFile)
+			" default settings come before the first named block
+			if line =~ '^\s*['
+				break
+			else
+				let	list = matchlist( line, '^\s*severity\s*=\s*\([12345]\)' )
+				if !empty(list)
+					let s:Perl_PerlcriticSeverity	= list[1]
+					let	perlCriticRcFileUsed	= 'yes'
+				endif
+				let	list = matchlist( line, '^\s*severity\s*=\s*\(brutal\|cruel\|harsh\|stern\|gentle\)' )
+				if !empty(list)
+					let s:Perl_PerlcriticSeverity	= index( s:PCseverityName, list[1] )
+					let	perlCriticRcFileUsed	= 'yes'
+				endif
+				let	list = matchlist( line, '^\s*verbose\s*=\s*\(\d\+\)' )
+				if !empty(list) && 1<= list[1] && list[1] <= 11
+					let s:Perl_PerlcriticVerbosity	= list[1]
+					let	perlCriticRcFileUsed	= 'yes'
+				endif
+			endif
+		endfor
+	endif
+	" 
   let perlcriticoptions	=
 		  \      ' -severity '.s:Perl_PerlcriticSeverity
       \     .' -verbose '.eval("s:PCverbosityFormat".s:Perl_PerlcriticVerbosity)
@@ -2242,12 +2281,16 @@ function! Perl_Perlcritic ()
 				\				      ' ['.s:PCseverityName[s:Perl_PerlcriticSeverity].']'.
 				\							', verbosity '.s:Perl_PerlcriticVerbosity
 	"
+	let rcfile	= ''
+	if perlCriticRcFileUsed == 'yes'
+		let rcfile	= " ( configcfile '".perlCriticRcFile."' )"
+	endif
   if l:currentbuffer ==  bufname("%")
-		let s:Perl_PerlcriticMsg	= l:currentbuffer.' :  NO CRITIQUE  ('.sev_and_verb.')'
+		let s:Perl_PerlcriticMsg	= l:currentbuffer.' :  NO CRITIQUE, '.sev_and_verb.' '.rcfile
   else
     setlocal wrap
     setlocal linebreak
-		let s:Perl_PerlcriticMsg	= 'perlcritic : '.sev_and_verb
+		let s:Perl_PerlcriticMsg	= 'perlcritic : '.sev_and_verb.rcfile
   endif
 	redraw!
   echohl Search | echo s:Perl_PerlcriticMsg | echohl None
