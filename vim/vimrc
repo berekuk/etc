@@ -3,63 +3,73 @@ filetype off
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
-set nocompatible      " отключаем совместимость с классическим vi
+set nocompatible      " nobody cares about stupid classic vi
 
-set autoindent           " автоотступы, перенос строки оставляет курсор в той же колонке
-set encoding=utf8     " дефолтная кодировка
-set fileencodings=utf-8,cp1251 " автоопределение кодировки
-set tabstop=4            " ширина табов 4
-set shiftwidth=4         " ...никогда не разбирался, в чем разница
-set softtabstop=4      " ...между этими тремя опциями
-set modeline             " включаем modeline - возможность в текстовом файле указать опции vim
-set modelines=5       " modeline работает в верхних и нижних 5 строчках
-set expandtab           " пробелы вместо табов
-set listchars=tab:↣⇢,trail:· " подсветка табов и пробелов в конце строки
-set list                       " включена по дефолту, как рекомендует наша wiki; жаль, что не все аккуратно к этому относятся
-au FileType make setlocal noexpandtab " не заменять табы пробелами в Makefile'ах
+" disable modeline - they cause security issues
+set modelines=0
+set nomodeline
 
-set hlsearch             " по дефолту результаты поиска подсвечиваются
-set incsearch           " инкрементальный поиск - курсор перемещается в процессе набора искомой строки
-set ruler                   " включаем полезную информацию в предпоследней строке экрана
-set laststatus=2       " всегда, даже если открыт только один файл
-set history=50         " увеличиваем буфер команд
-set showcmd           " показывать всякую дополнительную информацию в процессе набора команды
-set wrap              " переносить длинные строки
-set smartindent         " умное выравнивание { и }
-" отключить умное выравнивание комментариев с '#'
+set autoindent           " keep cursor in the same column on cr
+set encoding=utf8     " utf is default
+set fileencodings=utf-8,cp1251 " detect cp1251 if possible
+
+" not sure about the difference of these options
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" spaces instead of tabs
+set expandtab
+
+au FileType make setlocal noexpandtab " don't expand tabs in Makefiles
+
+" highlight trailing tabs and spaces
+set list
+set listchars=tab:↣⇢,trail:·
+
+set scrolloff=3     " going to try it for some time and see if I like it
+
+set hlsearch             " highlight all search results
+set incsearch           " incremental search
+
+set ruler                   " useful info at the bottom of the screen
+set laststatus=2       " even if only one file is open
+
+set history=50         " increase command history buffer
+set showcmd
+
+set wrap
+
+" smart indentation of { and }
+set smartindent
+" but disable indentation of comments
 inoremap # X#
-set visualbell          " не бибикать!
-set wildmenu            " улучшенное меню выбора файлов
+
+set visualbell          " don't beep!
+set wildmenu            " improved file select menu
 
 set background=light
 colorscheme my
 
-" отключить подсветку результатов предыдущего поиска
+" disable search highlight
 map <F2> :nohlsearch<CR>
 
-" включить/выключить отображение табов
+" toggle visibility of tabs and spaces
 map <F3> :set list!<CR>
 
-" переключение кодировок текущего файла
+" switch encoding
 map <F5> :e ++enc=cp1251<CR>
 map <F6> :e ++enc=utf-8<CR>
 map <F7> :e ++enc=koi8-r<CR>
 
-" включить/выключить set paste (отключение автоотступов, нужно при копипасте откуда-нибудь из браузера)
+" toggle 'set paste'
 set pastetoggle=<F8>
 
-" удалить все пробелы на конце строк
+" delete all trailing spaces
 nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
-autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit " правильная подсветка при редактировании коммита после git commit
+autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit " highlight 'git commit' contents
 
-filetype plugin on " включаем опознавание типов файлов
+filetype plugin on
 filetype indent on
-syntax on " и подсветку синтаксиса
-
-" автозамена title окна в screen'е на имя текущего файла
-" не успел еще понять, полезно это или вредно (оно не заменяется обратно после выхода из vim'а)
-if $TERM=='screen'
-   exe "set title titlestring=vim:%f"
-   exe "set title t_ts=\<ESC>k t_fs=\<ESC>\\"
-endif
+syntax on
