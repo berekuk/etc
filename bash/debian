@@ -3,3 +3,5 @@
 alias sags='sudo apt-get source'
 alias sagi='sudo aptitude install'
 alias sagu='sudo aptitude update'
+alias acs='apt-cache search'
+alias acp='apt-cache policy'
