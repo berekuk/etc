@@ -9,6 +9,7 @@ alias l='ls -CF'
 alias gst='git status -s'
 alias gc='git commit'
 alias gd='git diff'
+alias gdc='git diff --color-words'
 alias ga='git add'
 
 alias ra='$EDITOR ~/etc/bash/aliases; source ~/etc/bash/aliases'
