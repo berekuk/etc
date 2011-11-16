@@ -1,11 +1,10 @@
 # vim: ft=sh
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export MANPATH=/opt/local/share/man:$MANPATH
 export BLOCKSIZE=1K # can i set this on linux too? will i get confused by it? (see environ(7) for details)
 export CLICOLOR=1
+export GREP_OPTIONS= # disable GREP_OPTIONS - it conflicts with brew
 
-if [ -f /opt/local/etc/bash_completion ]; then
-    . /opt/local/etc/bash_completion
+if [ -f /usr/local/etc/bash_completion ]; then
+    . /usr/local/etc/bash_completion
 fi
 
 # instead of default xterm-color, which is uncompatible with linux screen
