@@ -9,3 +9,5 @@ hi PreProc  term=underline cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
 hi Type     term=underline cterm=NONE ctermfg=DarkGreen ctermbg=NONE
 hi Underlined   term=underline cterm=underline ctermfg=DarkMagenta
 hi Ignore   term=NONE cterm=NONE ctermfg=white ctermbg=NONE
+
+hi ColorColumn ctermbg=lightgrey

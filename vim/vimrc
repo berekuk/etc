@@ -5,6 +5,8 @@ call pathogen#runtime_append_all_bundles()
 
 set nocompatible      " nobody cares about stupid classic vi
 
+set ttyfast
+
 " disable modeline - they cause security issues
 set modelines=0
 set nomodeline
@@ -17,6 +19,8 @@ set fileencodings=utf-8,cp1251 " detect cp1251 if possible
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+
+set backspace=indent,eol,start " allow backspace everywhere
 
 " spaces instead of tabs
 set expandtab
@@ -32,8 +36,11 @@ set scrolloff=3     " going to try it for some time and see if I like it
 set hlsearch             " highlight all search results
 set incsearch           " incremental search
 
+set gdefault    " s///g by default
+
 set ruler                   " useful info at the bottom of the screen
-set laststatus=2       " even if only one file is open
+set laststatus=2            " even if only one file is open
+set colorcolumn=80          " long lines are evil
 
 set history=50         " increase command history buffer
 set showcmd
@@ -47,9 +54,14 @@ inoremap # X#
 
 set visualbell          " don't beep!
 set wildmenu            " improved file select menu
+set wildmode=list:longest " consistent with bash
 
 set background=light
 colorscheme my
+
+" easier to type than default '\'
+let mapleader = ","
+let maplocalleader = ","
 
 " disable search highlight
 map <F2> :nohlsearch<CR>
@@ -68,8 +80,17 @@ set pastetoggle=<F8>
 " delete all trailing spaces
 nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
-autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit " highlight 'git commit' contents
+" very magic regexes - perl compatible (mostly)
+nnoremap / /\v
+vnoremap / /\v
+
+" highlight 'git commit' contents
+autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
 filetype plugin on
 filetype indent on
 syntax on
+
+""""""""""""""""" TODO """""""""""""""
+" set hidden?
+" set cursorline?
