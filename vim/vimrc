@@ -40,7 +40,12 @@ set gdefault    " s///g by default
 
 set ruler                   " useful info at the bottom of the screen
 set laststatus=2            " even if only one file is open
-set colorcolumn=80          " long lines are evil
+
+if exists('+colorcolumn')
+  set colorcolumn=80 " long lines are evil
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
 
 set history=50         " increase command history buffer
 set showcmd
