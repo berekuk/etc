@@ -11,5 +11,6 @@ alias gc='git commit'
 alias gd='git diff'
 alias gdc='git diff --color-words'
 alias ga='git add'
+alias gco='git checkout'
 
 alias ra='$EDITOR ~/etc/bash/aliases; source ~/etc/bash/aliases'
