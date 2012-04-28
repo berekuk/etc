@@ -10,7 +10,7 @@
 	name = Vyacheslav Matyukhin
 	email = mmcleric@yandex-team.ru
 [alias]
-    lol = log --pretty=oneline --abbrev-commit --graph --decorate
+    lol = log --pretty=oneline --abbrev-commit --graph --decorate --branches=*
 	up = pull --rebase
 	wu = log --stat origin..@{0}
 	wup = log -p origin..@{0}
