@@ -8,8 +8,8 @@ set nocompatible      " nobody cares about stupid classic vi
 set ttyfast
 
 " disable modeline - they cause security issues
-set modelines=0
-set nomodeline
+set modelines=5
+"set nomodeline
 
 set autoindent           " keep cursor in the same column on cr
 set encoding=utf8     " utf is default
