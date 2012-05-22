@@ -7,14 +7,14 @@
     interactive = auto
     status = auto
 [user]
-	name = Vyacheslav Matyukhin
-	email = mmcleric@yandex-team.ru
+    name = Vyacheslav Matyukhin
+    email = mmcleric@yandex-team.ru
 [alias]
     lol = log --pretty=oneline --abbrev-commit --graph --decorate --branches=*
-	up = pull --rebase
-	wu = log --stat origin..@{0}
-	wup = log -p origin..@{0}
+    up = pull --rebase
 [pack]
     threads = 0
 [diff]
     renameLimit = 0
+[push]
+    default = current
