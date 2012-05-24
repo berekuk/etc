@@ -87,10 +87,6 @@ set pastetoggle=<F8>
 " delete all trailing spaces
 nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
-" very magic regexes - perl compatible (mostly)
-nnoremap / /\v
-vnoremap / /\v
-
 " highlight 'git commit' contents
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
