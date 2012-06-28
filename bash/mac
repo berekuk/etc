@@ -8,6 +8,6 @@ if [ -f /usr/local/etc/bash_completion ]; then
 fi
 
 # instead of default xterm-color, which is uncompatible with linux screen
-# commented because of bug with vim double-buffer drawing bug
+# commented because of vim double-buffer drawing bug
 #export TERM=xterm
 
