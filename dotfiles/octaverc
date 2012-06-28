@@ -1,0 +1,5 @@
+# needed for homebrew-installed octave+gnuplot
+# I'm getting "unknown or ambiguous terminal type" otherwise
+# and I couldn't install aquaterm for some reason
+# see http://stackoverflow.com/questions/1736816/octave-gnuplot-os-x-10-6-nothing-happens for details
+setenv GNUTERM 'x11'
