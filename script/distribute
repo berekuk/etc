@@ -6,13 +6,24 @@ use warnings;
 use IPC::System::Simple;
 use autodie qw(:all);
 
-sub main {
-    die "Usage: distribute HOSTNAME" unless @ARGV == 1;
-    my $host = shift @ARGV;
+sub distribute2host {
+    my $host = shift;
 
     system("ssh $host 'mkdir -p ~/bin'");
     system("scp ~/etc/script/accept_configs $host:~/bin/");
     system("(cd ~/etc && git archive --format=tar HEAD) | ssh $host '~/bin/accept_configs'");
+}
+
+sub main {
+    if (@ARGV) {
+        distribute2host($_) for @ARGV;
+    }
+    else {
+        while (my $host = <STDIN>) {
+            chomp $host;
+            distribute2host($host);
+        }
+    }
 }
 
 main unless caller;
