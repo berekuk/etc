@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+sub xsystem {
+    system(@_) and die "'@_' failed";
+}
+
+sub main {
+    xsystem("rm -rf ~/etc");
+    xsystem("mkdir ~/etc && cd ~/etc && tar x");
+    xsystem("~/etc/script/install_dotfiles");
+}
+
+main unless caller;
