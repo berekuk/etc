@@ -86,3 +86,6 @@ if [ -f ~/etc/bash/local ]; then
     . ~/etc/bash/local
 fi
 
+if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
+    . ~/perl5/perlbrew/etc/bashrc
+fi
