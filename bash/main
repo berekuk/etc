@@ -89,3 +89,5 @@ fi
 if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
     . ~/perl5/perlbrew/etc/bashrc
 fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
