@@ -19,5 +19,7 @@
 [push]
     default = current
 [advice]
-	pushNonFastForward = false
-	statusHints = false
+    pushNonFastForward = false
+    statusHints = false
+[credential "https://github.com"]
+    username = berekuk
