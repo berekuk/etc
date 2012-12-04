@@ -91,6 +91,9 @@ set pastetoggle=<F8>
 " delete all trailing spaces
 nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
+" run current perl test
+nnoremap <LocalLeader>t :!prove -v %<CR>
+
 " highlight 'git commit' contents
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
