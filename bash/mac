@@ -10,8 +10,10 @@ fi
 # put /usr/local/bin before /usr/bin
 export PATH=$(perl -MList::MoreUtils=firstidx -E '@p = split /:/, $ENV{PATH}; $ub = firstidx { $_ eq "/usr/bin" } @p; $ulb = firstidx { $_ eq "/usr/local/bin" } @p; if (defined $ub and defined $ulb and $ub < $ulb) { ($p[$ub], $p[$ulb]) = ($p[$ulb], $p[$ub]) } say join ":", @p')
 
-export PATH=$PATH:/usr/local/share/python
+export PATH=/usr/local/share/python:$PATH
 # see https://github.com/mxcl/homebrew/wiki/Homebrew-and-Python
+
+export PATH=/usr/local/share/npm/bin:$PATH
 
 # instead of default xterm-color, which is uncompatible with linux screen
 # commented because of vim double-buffer drawing bug
