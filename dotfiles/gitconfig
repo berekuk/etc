@@ -23,3 +23,7 @@
     statusHints = false
 [credential "https://github.com"]
     username = berekuk
+[url "git://github.com/"]
+    insteadOf = "gh:"
+[url "git@github.com:berekuk/"]
+    insteadOf = "my:"
