@@ -25,7 +25,8 @@ set backspace=indent,eol,start " allow backspace everywhere
 " spaces instead of tabs
 set expandtab
 
-au FileType make setlocal noexpandtab " don't expand tabs in Makefiles
+au FileType make setlocal noexpandtab
+au FileType html set ts=2 sw=2 sts=2
 
 " highlight trailing tabs and spaces
 set list
