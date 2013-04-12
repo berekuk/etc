@@ -43,11 +43,10 @@ use warnings;
 == comment.file-description-pm == start ==
 package <CURSOR>;
 
-use namespace::autoclean;
-use Moose;
+use Moo;
 
 
-__PACKAGE__->meta->make_immutable;
+1;
 §%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 == comment.file-description-t == start ==
 #!/usr/bin/perl
