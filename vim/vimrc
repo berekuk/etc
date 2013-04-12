@@ -26,7 +26,7 @@ set backspace=indent,eol,start " allow backspace everywhere
 set expandtab
 
 au FileType make setlocal noexpandtab
-au FileType html set ts=2 sw=2 sts=2
+au FileType html setlocal ts=2 sw=2 sts=2
 
 " highlight trailing tabs and spaces
 set list
@@ -76,6 +76,9 @@ map <F2> :nohlsearch<CR>
 
 " toggle visibility of tabs and spaces
 map <F3> :set list!<CR>
+" I switched off 'use all F* keys as standard function keys' setting on my Mac
+" recently, so hitting F3 is now less convenient
+map <LocalLeader><Tab> :set list!<CR>
 
 " switch encoding
 map <F5> :e ++enc=cp1251<CR>
