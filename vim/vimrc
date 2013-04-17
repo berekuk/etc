@@ -25,7 +25,8 @@ set backspace=indent,eol,start " allow backspace everywhere
 " spaces instead of tabs
 set expandtab
 
-au FileType make setlocal noexpandtab " don't expand tabs in Makefiles
+au FileType make setlocal noexpandtab
+au FileType html setlocal ts=2 sw=2 sts=2
 
 " highlight trailing tabs and spaces
 set list
@@ -75,6 +76,9 @@ map <F2> :nohlsearch<CR>
 
 " toggle visibility of tabs and spaces
 map <F3> :set list!<CR>
+" I switched off 'use all F* keys as standard function keys' setting on my Mac
+" recently, so hitting F3 is now less convenient
+map <LocalLeader><Tab> :set list!<CR>
 
 " switch encoding
 map <F5> :e ++enc=cp1251<CR>
@@ -95,7 +99,7 @@ nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 nnoremap <LocalLeader>t :!prove -v %<CR>
 
 " search for modules in ./lib on 'gf'
-set path += lib
+set path+=lib
 
 " highlight 'git commit' contents
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit

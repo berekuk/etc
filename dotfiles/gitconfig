@@ -33,3 +33,6 @@
     pushInsteadOf = "git://github.com/berekuk/"
 [url "git://github.com/berekuk/"]
     insteadOf = "my:"
+
+[github]
+    user = berekuk
