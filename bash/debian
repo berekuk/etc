@@ -5,3 +5,6 @@ alias sagi='sudo aptitude install'
 alias sagu='sudo aptitude update'
 alias acs='apt-cache search'
 alias acp='apt-cache policy'
+
+export DEBEMAIL=me@berekuk.ru
+export DEBFULLNAME='Vyacheslav Matyukhin'
