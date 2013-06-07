@@ -104,6 +104,8 @@ set path+=lib
 " highlight 'git commit' contents
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
+autocmd Filetype html,xml,xsl source ~/etc/vim/bundle/closetag/scripts/closetag.vim
+
 filetype plugin on
 filetype indent on
 syntax on
