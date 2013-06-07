@@ -138,8 +138,8 @@ endif
 let loaded_closetag=1
 
 " set up mappings for tag closing
-inoremap <C-_> <C-R>=GetCloseTag()<CR>
-map <C-_> a<C-_><ESC>
+inoremap <C-c> <C-R>=GetCloseTag()<CR>
+map <C-c> a<C-c><ESC>
 
 "------------------------------------------------------------------------------
 " Tag closer - uses the stringstack implementation below
