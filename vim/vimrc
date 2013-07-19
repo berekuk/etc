@@ -27,7 +27,6 @@ set expandtab
 
 au FileType make setlocal noexpandtab
 au FileType html setlocal ts=2 sw=2 sts=2
-au FileType coffee setlocal ts=2 sw=2 sts=2
 
 " highlight trailing tabs and spaces
 set list
