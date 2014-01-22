@@ -104,6 +104,9 @@ set path+=lib
 " highlight 'git commit' contents
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
+" .txt files are markdown by default
+autocmd BufNewFile,BufRead *.txt set filetype=markdown
+
 filetype plugin on
 filetype indent on
 syntax on
