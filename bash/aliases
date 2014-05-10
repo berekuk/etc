@@ -12,5 +12,7 @@ alias gd='git diff'
 alias gdc='git diff --color-words'
 alias ga='git add'
 alias gco='git checkout'
+alias vs='vagrant ssh'
+alias vp='vagrant provision'
 
 alias ra='$EDITOR ~/etc/bash/aliases; source ~/etc/bash/aliases'
