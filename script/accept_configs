@@ -9,7 +9,7 @@ sub xsystem {
 
 sub main {
     xsystem("rm -rf ~/etc");
-    xsystem("mkdir ~/etc && cd ~/etc && tar x");
+    xsystem("mkdir ~/etc && cd ~/etc && tar xf -");
     xsystem("~/etc/script/install_dotfiles");
 }
 
