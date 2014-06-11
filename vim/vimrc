@@ -1,9 +1,4 @@
-set runtimepath^=~/etc/vim
-filetype off
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
-
-set nocompatible      " nobody cares about stupid classic vi
+source ~/etc/vim/bundles.vim
 
 set ttyfast
 

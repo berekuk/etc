@@ -2,8 +2,12 @@
 
 set -e
 cd
+echo 'Linking dotfiles'
 for file in etc/dotfiles/*; do
     name=`basename $file`
     rm -f ~/.$name
     ln -s $file ~/.$name
 done
+
+echo 'Installing vim bundles'
+vim -u ~/etc/vim/bundles.vim +PluginInstall +qall >/dev/null 2>/dev/null
