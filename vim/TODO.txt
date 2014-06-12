@@ -1,0 +1,4 @@
+- migrate to Vundle
+- try NeoVundle
+- fix closetag key
+- nice color scheme
