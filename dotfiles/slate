@@ -48,12 +48,15 @@ bind down:${hyper}        resize +0   +10%
 bind g:${hyper} hint
 
 # App bindings
-bind w:${hyper} focus 'Yandex'
+bind w:${hyper} focus 'Google Chrome'
 bind e:${hyper} focus 'iTerm'
 bind a:${hyper} focus 'Adium'
 bind s:${hyper} focus 'Skype'
 bind d:${hyper} focus 'Dash'
 bind f:${hyper} focus 'Finder'
 bind c:${hyper} focus 'Calendario'
+bind i:${hyper} focus 'iTunes'
+bind m:${hyper} focus 'Microsoft Word'
+bind v:${hyper} focus 'VLC'
 bind tab:cmd resize +0 +0
 bind return:${hyper} ${full}
