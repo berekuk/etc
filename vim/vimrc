@@ -102,7 +102,7 @@ autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 " .txt files are markdown by default
 autocmd BufNewFile,BufRead *.txt set filetype=markdown
 
-autocmd Filetype html,xml,xsl source ~/etc/vim/bundle/closetag/scripts/closetag.vim
+autocmd Filetype html,xml,xsl source ~/etc/vim/bundle/closetag.vim/plugin/closetag.vim
 
 filetype plugin on
 filetype indent on
