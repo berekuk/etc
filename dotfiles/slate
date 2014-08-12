@@ -56,5 +56,6 @@ bind d:${hyper} focus 'Dash'
 bind f:${hyper} focus 'Finder'
 bind c:${hyper} focus 'Calendario'
 bind m:${hyper} focus 'Microsoft Word'
+bind 1:${hyper} focus '1Password'
 bind tab:cmd resize +0 +0
 bind return:${hyper} ${full}
