@@ -18,3 +18,9 @@ Plugin 'perl-support.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'vim-perl/vim-perl'
+
+Plugin 'godlygeek/tabular' " required by vim-markdown
+Plugin 'plasticboy/vim-markdown'
+
+call vundle#end()
+filetype plugin indent on
