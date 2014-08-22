@@ -9,5 +9,10 @@ for file in etc/dotfiles/*; do
     ln -s $file ~/.$name
 done
 
+VUNDLE_DIR=~/etc/vim/bundle/Vundle.vim
+if ! [ -d $VUNDLE_DIR ]; then
+    git clone https://github.com/gmarik/vundle.git $VUNDLE_DIR
+fi
+
 echo 'Installing vim bundles'
 vim -u ~/etc/vim/bundles.vim +PluginInstall +qall >/dev/null 2>/dev/null
