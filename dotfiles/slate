@@ -58,5 +58,6 @@ bind c:${hyper} focus 'Calendario'
 bind i:${hyper} focus 'iTunes'
 bind m:${hyper} focus 'Microsoft Word'
 bind v:${hyper} focus 'VLC'
+bind x:${hyper} focus 'Xcode'
 bind tab:cmd resize +0 +0
 bind return:${hyper} ${full}
