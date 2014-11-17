@@ -103,6 +103,8 @@ autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 autocmd BufNewFile,BufRead *.txt set filetype=mkd
 
 autocmd Filetype html,xml,xsl source ~/etc/vim/bundle/closetag.vim/plugin/closetag.vim
+autocmd Filetype ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufNewFile,BufRead Gemfile set filetype=ruby
 
 syntax on
 
