@@ -6,7 +6,7 @@ set ttyfast
 set modelines=5
 "set nomodeline
 
-set autoindent           " keep cursor in the same column on cr
+" set autoindent           " keep cursor in the same column on cr
 set encoding=utf8     " utf is default
 set fileencodings=utf-8,cp1251 " detect cp1251 if possible
 
@@ -51,7 +51,7 @@ set showcmd
 set wrap
 
 " smart indentation of { and }
-set smartindent
+" set smartindent
 " but disable indentation of comments
 inoremap # X#
 
@@ -103,6 +103,8 @@ autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 autocmd BufNewFile,BufRead *.txt set filetype=mkd
 
 autocmd Filetype html,xml,xsl source ~/etc/vim/bundle/closetag.vim/plugin/closetag.vim
+autocmd Filetype ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufNewFile,BufRead Gemfile set filetype=ruby
 
 syntax on
 
