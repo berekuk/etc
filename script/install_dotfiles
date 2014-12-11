@@ -14,5 +14,7 @@ if ! [ -d $VUNDLE_DIR ]; then
     git clone https://github.com/gmarik/vundle.git $VUNDLE_DIR
 fi
 
+mkdir -p ~/tmp/vim
+
 echo 'Installing vim bundles'
 vim -u ~/etc/vim/bundles.vim +PluginInstall +qall >/dev/null 2>/dev/null

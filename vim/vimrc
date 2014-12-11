@@ -96,6 +96,8 @@ nnoremap <LocalLeader>t :!prove -v %<CR>
 " search for modules in ./lib on 'gf'
 set path+=lib
 
+set directory=~/tmp/vim//
+
 " highlight 'git commit' contents
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
