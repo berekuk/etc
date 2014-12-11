@@ -113,6 +113,9 @@ syntax on
 
 let g:vim_markdown_folding_disabled=1
 
+" gx opens urls with '?' and '&'
+set isfname+=?,&
+
 """"""""""""""""" TODO """""""""""""""
 " set hidden?
 " set cursorline?
