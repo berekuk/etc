@@ -89,3 +89,7 @@ fi
 if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
     . ~/perl5/perlbrew/etc/bashrc
 fi
+
+if (type rbenv 2>/dev/null >/dev/null); then
+    eval "$(rbenv init -)"
+fi
