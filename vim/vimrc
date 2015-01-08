@@ -2,34 +2,32 @@ source ~/etc/vim/bundles.vim
 
 set ttyfast
 
-" disable modeline - they cause security issues
 set modelines=5
-"set nomodeline
 
 " set autoindent           " keep cursor in the same column on cr
 set encoding=utf8     " utf is default
 set fileencodings=utf-8,cp1251 " detect cp1251 if possible
 
-" not sure about the difference of these options
+" Not sure about the difference of these options.
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
 set backspace=indent,eol,start " allow backspace everywhere
 
-" spaces instead of tabs
+" Spaces instead of tabs.
 set expandtab
 
 au FileType make setlocal noexpandtab
 au FileType html setlocal ts=2 sw=2 sts=2
 
-" highlight trailing tabs and spaces
+" Highlight trailing tabs and spaces.
 set list
 set listchars=tab:↣⇢,trail:·
 
-set scrolloff=3     " going to try it for some time and see if I like it
+set scrolloff=3         " going to try it for some time and see if I like it
 
-set hlsearch             " highlight all search results
+set hlsearch            " highlight all search results
 set incsearch           " incremental search
 
 set gdefault    " s///g by default
@@ -50,9 +48,9 @@ set showcmd
 
 set wrap
 
-" smart indentation of { and }
-" set smartindent
-" but disable indentation of comments
+" Smart indentation of { and }.
+" set smartindent <--- why is this commented? arrgh, my indentation settings are messed up.
+" ...but disable indentation of comments.
 inoremap # X#
 
 set visualbell          " don't beep!
@@ -62,26 +60,27 @@ set wildmode=list:longest " consistent with bash
 set background=light
 colorscheme my
 
-" easier to type than default '\'
+" Easier to type than default '\'.
 let mapleader = ","
 let maplocalleader = ","
 
-" disable search highlight
+" Disable search highlight.
 map <F2> :nohlsearch<CR>
 
-" toggle visibility of tabs and spaces
+" Toggle visibility of tabs and spaces.
 map <F3> :set list!<CR>
 " I switched off 'use all F* keys as standard function keys' setting on my Mac
 " recently, so hitting F3 is now less convenient
 map <LocalLeader><Tab> :set list!<CR>
 
-" switch encoding
+" Switch encoding.
+" I rarely use it these days.
 map <F5> :e ++enc=cp1251<CR>
 map <F6> :e ++enc=utf-8<CR>
 map <F7> :e ++enc=koi8-r<CR>
 
-" disable Ex mode - I never use it
-" see also: http://stackoverflow.com/questions/1269689/to-disable-entering-ex-mode-in-vim
+" Disable Ex mode - I never use it.
+" See also: http://stackoverflow.com/questions/1269689/to-disable-entering-ex-mode-in-vim
 map Q <Nop>
 
 " toggle 'set paste'
@@ -90,32 +89,24 @@ set pastetoggle=<F8>
 " delete all trailing spaces
 nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
-" run current perl test
-nnoremap <LocalLeader>t :!prove -v %<CR>
-
-" search for modules in ./lib on 'gf'
-set path+=lib
+:nnoremap <LocalLeader>d "=strftime("(%d %b %Y)")<CR>Pbb~$o<Esc>
 
 set directory=~/tmp/vim//
 
-" highlight 'git commit' contents
+" Highlight 'git commit' contents.
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
-" .txt files are markdown by default
-autocmd BufNewFile,BufRead *.txt set filetype=mkd
 
 autocmd Filetype html,xml,xsl source ~/etc/vim/bundle/closetag.vim/plugin/closetag.vim
-autocmd Filetype ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd Filetype eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd BufNewFile,BufRead Gemfile set filetype=ruby
 
 syntax on
 
-let g:vim_markdown_folding_disabled=1
-
-" gx opens urls with '?' and '&'
+" gx opens urls with '?' and '&'.
 set isfname+=?,&
+
+source ~/etc/vim/perl.vim
+source ~/etc/vim/ruby.vim
+source ~/etc/vim/markdown.vim
 
 """"""""""""""""" TODO """""""""""""""
 " set hidden?
-" set cursorline?

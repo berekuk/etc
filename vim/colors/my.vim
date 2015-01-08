@@ -1,5 +1,5 @@
-" strangely, I stole these from default syncolor.vim for *light* background
-" (I use dark currently)
+" Strangely, I stole these from default syncolor.vim for *light* background.
+" (I use dark currently.)
 hi Comment  term=bold cterm=NONE ctermfg=DarkBlue ctermbg=NONE
 hi Constant term=underline cterm=NONE ctermfg=DarkRed ctermbg=NONE
 hi Special  term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE
