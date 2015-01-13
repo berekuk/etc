@@ -5,11 +5,6 @@ config resizePercentOf screenSize
 alias hyper ctrl;shift;alt;cmd
 alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
 
-## Resize Bindings
-bind right:${hyper}       resize +10% +0
-bind left:${hyper}        resize -10% +0
-bind up:${hyper}          resize +0   -10%
-bind down:${hyper}        resize +0   +10%
 #bind right:ctrl;alt  resize -10% +0 bottom-right
 #bind left:ctrl;alt   resize +10% +0 bottom-right
 #bind up:ctrl;alt     resize +0   +10% bottom-right
@@ -21,11 +16,6 @@ bind down:${hyper}        resize +0   +10%
 #bind up:ctrl;cmd     push up    bar-resize:screenSizeY/2
 #bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
 #
-## Nudge Bindings
-#bind right:shift;alt nudge +10% +0
-#bind left:shift;alt  nudge -10% +0
-#bind up:shift;alt    nudge +0   -10%
-#bind down:shift;alt  nudge +0   +10%
 #
 ## Throw Bindings
 #bind 1:ctrl;alt         throw 0 resize
@@ -47,6 +37,18 @@ bind down:${hyper}        resize +0   +10%
 # Window Hints
 bind g:${hyper} hint
 
+## Resize Bindings
+bind right:${hyper}       resize +10% +0
+bind left:${hyper}        resize -10% +0
+bind up:${hyper}          resize +0   -10%
+bind down:${hyper}        resize +0   +10%
+
+# Nudge Bindings
+bind h:${hyper} nudge -10% +0
+bind l:${hyper} nudge +10% +0
+bind j:${hyper} nudge +0 +10%
+bind k:${hyper} nudge +0 -10%
+
 # App bindings
 bind w:${hyper} focus 'Google Chrome'
 bind e:${hyper} focus 'iTerm'
@@ -60,6 +62,7 @@ bind m:${hyper} focus 'Microsoft Word'
 bind v:${hyper} focus 'VLC'
 bind x:${hyper} focus 'Xcode'
 bind 1:${hyper} focus '1Password'
+bind y:${hyper} focus 'YNAB 4'
 
 bind tab:cmd resize +0 +0
 bind return:${hyper} ${full}
