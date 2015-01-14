@@ -89,7 +89,7 @@ set pastetoggle=<F8>
 " delete all trailing spaces
 nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
-:nnoremap <LocalLeader>d "=strftime("(%d %b %Y)")<CR>Pbb~$o<Esc>
+:nnoremap <LocalLeader>d "=strftime("(%d %b %Y)")<CR>Pbb~f)a<CR><CR><Esc>k
 
 set directory=~/tmp/vim//
 
