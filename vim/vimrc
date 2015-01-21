@@ -89,7 +89,11 @@ set pastetoggle=<F8>
 " delete all trailing spaces
 nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
+" insert current date
 :nnoremap <LocalLeader>d "=strftime("(%d %b %Y)")<CR>Pbb~f)a<CR><CR><Esc>k
+
+" lookup using Dash.app
+:nnoremap <LocalLeader>, :Dash<CR>
 
 set directory=~/tmp/vim//
 

@@ -22,5 +22,7 @@ Plugin 'vim-perl/vim-perl'
 Plugin 'godlygeek/tabular' " required by vim-markdown
 Plugin 'plasticboy/vim-markdown'
 
+Plugin 'rizzatti/dash.vim'
+
 call vundle#end()
 filetype plugin indent on
