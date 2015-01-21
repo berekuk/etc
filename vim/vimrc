@@ -105,8 +105,8 @@ autocmd Filetype html,xml,xsl source ~/etc/vim/bundle/closetag.vim/plugin/closet
 
 syntax on
 
-" gx opens urls with '?' and '&'.
-set isfname+=?,&
+" gx opens urls with '?', '&' and ':'.
+set isfname+=?,&,:
 
 source ~/etc/vim/perl.vim
 source ~/etc/vim/ruby.vim
