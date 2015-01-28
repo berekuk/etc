@@ -18,3 +18,5 @@ alias vp='vagrant provision'
 alias vu='vagrant up'
 
 alias ra='$EDITOR ~/etc/bash/aliases; source ~/etc/bash/aliases'
+alias ro='routine'
+alias i='inbox'
