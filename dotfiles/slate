@@ -63,6 +63,7 @@ bind v:${hyper} focus 'VLC'
 bind x:${hyper} focus 'Xcode'
 bind 1:${hyper} focus '1Password'
 bind y:${hyper} focus 'YNAB 4'
+bind p:${hyper} focus 'Vista Previa'
 
 bind tab:cmd resize +0 +0
 bind return:${hyper} ${full}
