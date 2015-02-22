@@ -111,6 +111,7 @@ set isfname+=?,&,:
 source ~/etc/vim/perl.vim
 source ~/etc/vim/ruby.vim
 source ~/etc/vim/markdown.vim
+source ~/etc/vim/js.vim
 
 """"""""""""""""" TODO """""""""""""""
 " set hidden?
