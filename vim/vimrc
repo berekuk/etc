@@ -91,6 +91,8 @@ nnoremap <LocalLeader><Space> :%s/\s\+$//<CR>
 
 " insert current date
 :nnoremap <LocalLeader>d "=strftime("(%d %b %Y)")<CR>Pbb~f)a<CR><CR><Esc>k
+" insert current time
+:nnoremap <LocalLeader>t "=strftime("(%H:%M)")<CR>Pbb~f)a<CR><CR><Esc>k
 
 " lookup using Dash.app
 :nnoremap <LocalLeader>, :Dash<CR>
