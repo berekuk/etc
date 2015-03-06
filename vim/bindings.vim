@@ -34,3 +34,8 @@ nnoremap <Leader>t "=strftime("(%H:%M)")<CR>Pbb~f)a<CR><CR><Esc>k
 
 " lookup using Dash.app
 nnoremap <Leader>, :Dash<CR>
+
+" command mode
+cnoremap <C-a> <Home>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
