@@ -1,4 +1,10 @@
-source ~/etc/vim/bundles.vim
+set runtimepath^=~/etc/vim
+set nocompatible      " nobody cares about stupid classic vi
+filetype off
+
+source ~/etc/vim/plugins.vim
+
+filetype plugin indent on
 
 set ttyfast
 

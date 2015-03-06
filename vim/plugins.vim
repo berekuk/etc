@@ -1,8 +1,3 @@
-set runtimepath^=~/etc/vim
-
-set nocompatible      " nobody cares about stupid classic vi
-filetype off
-
 " set the runtime path to include Vundle and initialize
 set runtimepath+=~/etc/vim/bundle/Vundle.vim
 call vundle#begin('~/etc/vim/bundle')
@@ -25,4 +20,3 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'rizzatti/dash.vim'
 
 call vundle#end()
-filetype plugin indent on
