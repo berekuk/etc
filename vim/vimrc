@@ -4,7 +4,6 @@ set ttyfast
 
 set modelines=5
 
-" set autoindent           " keep cursor in the same column on cr
 set encoding=utf8     " utf is default
 set fileencodings=utf-8,cp1251 " detect cp1251 if possible
 
@@ -17,9 +16,6 @@ set backspace=indent,eol,start " allow backspace everywhere
 
 " Spaces instead of tabs.
 set expandtab
-
-au FileType make setlocal noexpandtab
-au FileType html setlocal ts=2 sw=2 sts=2
 
 " Highlight trailing tabs and spaces.
 set list
@@ -48,6 +44,7 @@ set showcmd
 
 set wrap
 
+" set autoindent           " keep cursor in the same column on cr
 " Smart indentation of { and }.
 " set smartindent <--- why is this commented? arrgh, my indentation settings are messed up.
 " ...but disable indentation of comments.
@@ -60,60 +57,22 @@ set wildmode=list:longest " consistent with bash
 set background=light
 colorscheme my
 
-" Easier to type than default '\'.
-let mapleader = ","
-let maplocalleader = ","
-
-" Disable search highlight.
-map <F2> :nohlsearch<CR>
-
-" Toggle visibility of tabs and spaces.
-map <F3> :set list!<CR>
-" I switched off 'use all F* keys as standard function keys' setting on my Mac
-" recently, so hitting F3 is now less convenient
-map <Leader><Tab> :set list!<CR>
-
-" Switch encoding.
-" I rarely use it these days.
-map <F5> :e ++enc=cp1251<CR>
-map <F6> :e ++enc=utf-8<CR>
-map <F7> :e ++enc=koi8-r<CR>
-
-" Disable Ex mode - I never use it.
-" See also: http://stackoverflow.com/questions/1269689/to-disable-entering-ex-mode-in-vim
-map Q <Nop>
-
-" toggle 'set paste'
-set pastetoggle=<F8>
-
-" delete all trailing spaces
-nnoremap <Leader><Space> :%s/\s\+$//<CR>
-
-" insert current date
-:nnoremap <Leader>d "=strftime("(%d %b %Y)")<CR>Pbb~f)a<CR><CR><Esc>k
-" insert current time
-:nnoremap <Leader>t "=strftime("(%H:%M)")<CR>Pbb~f)a<CR><CR><Esc>k
-
-" lookup using Dash.app
-:nnoremap <Leader>, :Dash<CR>
-
 set directory=~/tmp/vim//
-
-" Highlight 'git commit' contents.
-autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
-
-
-autocmd Filetype html,xml,xsl source ~/etc/vim/bundle/closetag.vim/plugin/closetag.vim
-
-syntax on
 
 " gx opens urls with '?', '&' and ':'.
 set isfname+=?,&,:
 
+syntax on
+
+source ~/etc/vim/bindings.vim
+
+source ~/etc/vim/gitcommit.vim
+source ~/etc/vim/markdown.vim
+source ~/etc/vim/make.vim
 source ~/etc/vim/perl.vim
 source ~/etc/vim/ruby.vim
-source ~/etc/vim/markdown.vim
 source ~/etc/vim/js.vim
+source ~/etc/vim/html.vim
 
-""""""""""""""""" TODO """""""""""""""
+""""""""""""""""" TODO """""""""""""""""
 " set hidden?
