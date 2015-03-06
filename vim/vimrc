@@ -13,15 +13,14 @@ set modelines=5
 set encoding=utf8     " utf is default
 set fileencodings=utf-8,cp1251 " detect cp1251 if possible
 
-" Not sure about the difference of these options.
-set tabstop=4
+" Spaces instead of tabs.
+set expandtab
+
+set tabstop=8
 set shiftwidth=4
 set softtabstop=4
 
 set backspace=indent,eol,start " allow backspace everywhere
-
-" Spaces instead of tabs.
-set expandtab
 
 " Highlight trailing tabs and spaces.
 set list
