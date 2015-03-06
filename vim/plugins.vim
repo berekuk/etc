@@ -12,6 +12,7 @@ Plugin 'othree/html5.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'vim-perl/vim-perl'
+Plugin 'hynek/vim-python-pep8-indent'
 
 Plugin 'godlygeek/tabular' " required by vim-markdown
 Plugin 'plasticboy/vim-markdown'
