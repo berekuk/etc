@@ -62,6 +62,7 @@ bind m:${hyper} focus 'Microsoft Word'
 bind v:${hyper} focus 'VLC'
 bind x:${hyper} focus 'Xcode'
 bind 1:${hyper} focus '1Password'
+bind 2:${hyper} focus 'Anki'
 bind y:${hyper} focus 'YNAB 4'
 bind p:${hyper} focus 'Vista Previa'
 
