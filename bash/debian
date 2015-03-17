@@ -1,8 +1,8 @@
 # vim: ft=sh
 
 alias sags='sudo apt-get source'
-alias sagi='sudo aptitude install'
-alias sagu='sudo aptitude update'
+alias sagi='sudo apt-get install'
+alias sagu='sudo apt-get update'
 alias acs='apt-cache search'
 alias acp='apt-cache policy'
 
