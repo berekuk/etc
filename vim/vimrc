@@ -59,8 +59,8 @@ set visualbell          " don't beep!
 set wildmenu            " improved file select menu
 set wildmode=list:longest " consistent with bash
 
-set background=light
-colorscheme my
+set background=dark
+colorscheme base16-default
 
 set directory=~/tmp/vim//
 
