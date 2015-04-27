@@ -79,5 +79,12 @@ source ~/etc/vim/ruby.vim
 source ~/etc/vim/js.vim
 source ~/etc/vim/html.vim
 
+
+""" useful for syntax debugging
+"function! SyntaxItem()
+"    return synIDattr(synID(line("."),col("."),1),"name")
+"endfunction
+"set statusline+=%{SyntaxItem()}
+
 """"""""""""""""" TODO """""""""""""""""
 " set hidden?
