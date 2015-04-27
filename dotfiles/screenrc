@@ -44,3 +44,6 @@ bufferfile ~/.bak/screen-exchange
 
 # дальше настройка терминала, лучше взять из своего дистрибутивного
 # дефолтного screenrc, обычно они там есть.
+
+# via https://wiki.archlinux.org/index.php/GNU_Screen#Use_256_colors
+term xterm-256color
