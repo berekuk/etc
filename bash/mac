@@ -19,4 +19,4 @@ export PATH=$PATH:./node_modules/.bin
 # commented because of vim double-buffer drawing bug
 #export TERM=xterm
 
-export DOCKER_HOST=tcp://127.0.0.1:4243
+eval "$(docker-machine env dev)"
