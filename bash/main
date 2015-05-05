@@ -2,6 +2,13 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+locales=$(locale -a)
+if echo $locales | fgrep -q 'en_US.utf8'; then
+    export LANG='en_US.utf8'
+elif echo $locales | fgrep -q 'en_US.UTF-8'; then
+    export LANG='en_US.UTF-8'
+fi
+
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
 export HISTFILESIZE=10000
@@ -41,13 +48,6 @@ export MYSQL_PS1='[\h] \d> '    # host and DB in mysql prompt, very helpful
 export EDITOR='vim'             # default editor everywhere
 export LESSCHARSET='utf-8'      # fixing crackozabrs
 export GREP_OPTIONS='--color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*' # don't grep in VCS-specific files
-
-locales=`locale -a`
-if echo $locales | fgrep -q 'en_US.utf8'; then
-    export LANG='en_US.utf8'
-elif echo $locales | fgrep -q 'en_US.UTF-8'; then
-    export LANG='en_US.UTF-8'
-fi
 
 # OS-specific
 uname=`uname`
