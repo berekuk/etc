@@ -17,4 +17,4 @@ fi
 mkdir -p ~/tmp/vim
 
 echo 'Installing vim bundles'
-vim -N -u ~etc/vim/plugins.vim +PluginInstall +qall >/dev/null 2>/dev/null
+vim -N -u ~/etc/vim/plugins.vim +PluginInstall +qall >/dev/null 2>/dev/null
