@@ -14,9 +14,6 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=/usr/local/heroku/bin:$PATH
 export PATH=$PATH:./node_modules/.bin
-
-# instead of default xterm-color, which is uncompatible with linux screen
-# commented because of vim double-buffer drawing bug
-#export TERM=xterm
+export PATH=$PATH:~/Dropbox/scripts
 
 eval "$(docker-machine env dev)"
