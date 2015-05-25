@@ -78,6 +78,7 @@ source ~/etc/vim/perl.vim
 source ~/etc/vim/ruby.vim
 source ~/etc/vim/js.vim
 source ~/etc/vim/html.vim
+source ~/etc/vim/yaml.vim
 
 
 """ useful for syntax debugging
