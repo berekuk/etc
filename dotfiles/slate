@@ -56,7 +56,7 @@ bind a:${hyper} focus 'Adium'
 bind s:${hyper} focus 'Skype'
 bind d:${hyper} focus 'Dash'
 bind f:${hyper} focus 'Finder'
-bind c:${hyper} focus 'Calendario'
+bind c:${hyper} focus 'Calendar'
 bind i:${hyper} focus 'iTunes'
 bind m:${hyper} focus 'Microsoft Word'
 bind v:${hyper} focus 'VLC'
@@ -64,7 +64,8 @@ bind x:${hyper} focus 'Xcode'
 bind 1:${hyper} focus '1Password'
 bind 2:${hyper} focus 'Anki'
 bind y:${hyper} focus 'YNAB 4'
-bind p:${hyper} focus 'Vista Previa'
+bind p:${hyper} focus 'Preview'
+bind q:${hyper} focus 'OmniFocus'
 
 bind tab:cmd resize +0 +0
 bind return:${hyper} ${full}
