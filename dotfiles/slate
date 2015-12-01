@@ -66,6 +66,7 @@ bind 2:${hyper} focus 'Anki'
 bind y:${hyper} focus 'YNAB 4'
 bind p:${hyper} focus 'Preview'
 bind q:${hyper} focus 'OmniFocus'
+bind 4:${hyper} focus 'Kindle'
 
 bind tab:cmd resize +0 +0
 bind return:${hyper} ${full}
