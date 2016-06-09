@@ -50,23 +50,31 @@ bind j:${hyper} nudge +0 +10%
 bind k:${hyper} nudge +0 -10%
 
 # App bindings
+bind q:${hyper} focus 'OmniFocus'
 bind w:${hyper} focus 'Google Chrome'
-bind e:${hyper} focus 'iTerm'
+bind e:${hyper} focus 'iTerm2'
+bind r:${hyper} focus 'Emacs'
+bind t:${hyper} focus 'Telegram'
+bind y:${hyper} focus 'YNAB 4'
+bind i:${hyper} focus 'iTunes'
+bind p:${hyper} focus 'Preview'
 bind a:${hyper} focus 'Adium'
-bind s:${hyper} focus 'Skype'
+bind s:${hyper} focus 'Slack'
 bind d:${hyper} focus 'Dash'
 bind f:${hyper} focus 'Finder'
+bind z:${hyper} focus 'InDesign CC'
+bind x:${hyper} focus 'Pixelmator'
 bind c:${hyper} focus 'Calendar'
-bind i:${hyper} focus 'iTunes'
-bind m:${hyper} focus 'Microsoft Word'
+bind m:${hyper} focus 'Mail'
+bind n:${hyper} focus 'Notes'
 bind v:${hyper} focus 'VLC'
-bind x:${hyper} focus 'Xcode'
-bind 1:${hyper} focus '1Password'
+bind b:${hyper} focus 'Balsamiq Mockups 3'
+bind 1:${hyper} focus '1Password 6'
 bind 2:${hyper} focus 'Anki'
-bind y:${hyper} focus 'YNAB 4'
-bind p:${hyper} focus 'Preview'
-bind q:${hyper} focus 'OmniFocus'
-bind 4:${hyper} focus 'Kindle'
+# hyper+3 is taken by OmniFocus (Quick Add)
+# hyper+4 is taken by OmniFocus (Capture)
+bind 5:${hyper} focus 'Kindle'
+bind space:${hyper} focus 'Safari'
 
 bind tab:cmd resize +0 +0
 bind return:${hyper} ${full}
