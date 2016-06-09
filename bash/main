@@ -1,5 +1,12 @@
 # vim: ft=sh
-# If not running interactively, don't do anything
+
+# settings for non-interactive mode
+# (use these sparingly, they can slow execution of GUI apps)
+if [ -f ~/etc/bash/noninteractive ]; then
+    . ~/etc/bash/noninteractive
+fi
+
+# If not running interactively, don't do anything else
 [ -z "$PS1" ] && return
 
 locales=$(locale -a)
