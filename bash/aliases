@@ -1,5 +1,7 @@
 # vim: ft=sh
 
+alias grep='grep --color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*'
+
 # some common ls aliases
 alias ll='ls -l'
 alias la='ls -A'
