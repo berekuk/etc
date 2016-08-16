@@ -8,7 +8,7 @@
     status = auto
 [user]
     name = Vyacheslav Matyukhin
-    email = mmcleric@yandex-team.ru
+    email = me@berekuk.ru
 	signingkey = 5489F96C
 [alias]
     lol = log --pretty=oneline --abbrev-commit --graph --decorate --branches=*
