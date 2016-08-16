@@ -68,7 +68,7 @@ bind c:${hyper} focus 'Calendar'
 bind m:${hyper} focus 'Mail'
 bind n:${hyper} focus 'Notes'
 bind v:${hyper} focus 'VLC'
-bind b:${hyper} focus 'Balsamiq Mockups 3'
+bind b:${hyper} focus 'brainworkshop'
 bind 1:${hyper} focus '1Password 6'
 bind 2:${hyper} focus 'Anki'
 # hyper+3 is taken by OmniFocus (Quick Add)
