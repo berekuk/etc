@@ -4,7 +4,12 @@ set -e
 cd
 echo 'Linking dotfiles'
 SOURCE=etc/dotfiles
-for file in `cd $SOURCE && find . -type f | perl -pnE 's{\./}{}'`; do
+
+# special case - hammerspoon doesn't play well with file symlinks
+rm -rf .hammerspoon
+ln -s $SOURCE/hammerspoon .hammerspoon
+
+for file in `cd $SOURCE && find . -type f | fgrep -v hammerspoon | perl -pnE 's{\./}{}'`; do
     src="$SOURCE/$file"
     dst=".$file"
 
