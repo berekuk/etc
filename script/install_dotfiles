@@ -3,10 +3,18 @@
 set -e
 cd
 echo 'Linking dotfiles'
-for file in etc/dotfiles/*; do
-    name=`basename $file`
-    rm -f ~/.$name
-    ln -s $file ~/.$name
+SOURCE=etc/dotfiles
+for file in `cd $SOURCE && find . -type f | perl -pnE 's{\./}{}'`; do
+    src="$SOURCE/$file"
+    dst=".$file"
+
+    dst_dir=`dirname $dst`
+    if [ -n "$dst_dir" ]; then
+        mkdir -p $dst_dir
+    fi
+
+    rm -f $dst
+    ln -s $src $dst
 done
 
 VUNDLE_DIR=~/etc/vim/bundle/Vundle.vim
