@@ -5,13 +5,13 @@ cd
 echo 'Linking dotfiles'
 SOURCE=etc/dotfiles
 
-# special case - hammerspoon doesn't play well with file symlinks
-rm -rf .hammerspoon
-ln -s $SOURCE/hammerspoon .hammerspoon
-
-for file in `cd $SOURCE && find . -type f | fgrep -v hammerspoon | perl -pnE 's{\./}{}'`; do
-    src="$SOURCE/$file"
+for file in `cd $SOURCE && find . -type f | perl -pnE 's{\./}{}'`; do
     dst=".$file"
+
+    # 'etc/dotfiles' + '.karabiner.d/configuration/karabiner.json' -> '../../etc/dotfiles'
+    src_dir=$(python -c "import os.path; import sys; print(os.path.relpath(sys.argv[1], os.path.dirname(sys.argv[2])))" $SOURCE $dst)
+
+    src="$src_dir/$file"
 
     dst_dir=`dirname $dst`
     if [ -n "$dst_dir" ]; then
