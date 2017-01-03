@@ -18,6 +18,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     yaml
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
@@ -39,6 +40,7 @@ values."
      (react :variables
             ;; js2-mode
             js2-basic-offset 2
+            js-indent-level 2
             js2-strict-trailing-comma-warning nil
             js2-indent-switch-body t
             ;; web-mode
@@ -278,6 +280,10 @@ user code here.  The exception is org related code, which should be placed in
   (org-agenda arg "p")
   (delete-other-windows))
 
+(defun mm/org-all-files ()
+  (directory-files-recursively "~/Dropbox/org"
+                               "\.org$"))
+
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -309,7 +315,6 @@ layers configuration. You are free to put any user code."
     :cwd "/Users/berekuk/coding/lesswrong-ru/website")
   (add-to-list 'auto-mode-alist
                '("/Dropbox/ref/.*\\.txt\\'" . org-mode))
-  (global-set-key "\C-cb" 'org-iswitchb)
   (global-set-key (kbd "s-a") 'mm/open-agenda)
   (global-set-key (kbd "s-i") 'mm/open-inbox)
   (global-set-key (kbd "s-k") 'mm/open-todo)
@@ -320,25 +325,28 @@ layers configuration. You are free to put any user code."
   (require 'beeminder)
   (load-file "~/.spacemacs.private") ; includes beeminder token
 
-  (setq-default
-   js2-basic-offset 2
-  )
+  (setq org-modules (cons 'org-habit org-modules))
   (setq
    mm/insert-keylayout nil
    calendar-longitude 37.6173
    calendar-latitude 55.7558
    org-directory "~/Dropbox/org"
-   org-refile-targets '((org-agenda-files :maxlevel . 1))
+   org-refile-targets '((mm/org-all-files
+                         :maxlevel . 1))
    org-default-notes-file "~/Dropbox/org/inbox.org"
    org-return-follows-link t
    deft-directory "~/Dropbox/org/ref"
-   org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "DELEGATED(e)"
-                                 "|" "DONE(d)" "CANCELED(c)"))
+   org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)"
+                                 "DELEGATED(e)" "MEETING(m)" "|" "DONE(d)"
+                                 "CANCELED(c)"))
    org-enforce-todo-dependencies t
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
+   org-agenda-sticky t
    org-extend-today-until 5
+   org-startup-indented t
    org-log-into-drawer t
+   org-archive-location "~/Dropbox/archive/all.org::"
    org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled)
    org-columns-default-format "#+COLUMNS: %EFFORT %TODO %ITEM"
    org-agenda-custom-commands '(
@@ -346,11 +354,6 @@ layers configuration. You are free to put any user code."
                                  ((agenda ""
                                           (
                                            (org-agenda-ndays 1)))
-                                  (todo "NEXT"
-                                        ((org-agenda-overriding-header "Next tasks")
-                                         (org-agenda-todo-ignore-scheduled t)
-                                         (org-agenda-todo-ignore-deadlines t)
-                                         (org-agenda-todo-ignore-with-date t)))
                                   (tags-todo "media-SCHEDULED>\"<today>\"/TODO"
                                              ((org-agenda-overriding-header "Reading")))
                                   (tags-todo "pion/-WAITING"
@@ -386,6 +389,10 @@ layers configuration. You are free to put any user code."
    org-tags-exclude-from-inheritance '("PROJECT"))
   ;; via https://emacs.stackexchange.com/questions/2871/keeping-my-org-files-in-sync-across-multiple-computers
   (add-hook 'after-save-hook 'org-save-all-org-buffers)
+
+  (setq-default
+   js2-basic-offset 2
+   js-indent-level 2)
 ;  (add-hook 'evil-insert-state-entry-hook
 ;            (lambda ()
 ;              (if mm/insert-keylayout
@@ -416,7 +423,7 @@ layers configuration. You are free to put any user code."
     ("/Users/berekuk/Dropbox/org/todo.org" "/Users/berekuk/Dropbox/org/workshops.org" "/Users/berekuk/Dropbox/org/writing.org" "/Users/berekuk/Dropbox/org/inbox.org" "/Users/berekuk/Dropbox/org/notes.org" "/Users/berekuk/Dropbox/org/media.org")))
  '(package-selected-packages
    (quote
-    (rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby pcache highlight beeminder hide-comnt lua-mode xterm-color ws-butler window-numbering which-key web-mode use-package toc-org tern srefactor spaceline sass-mode pytest prodigy pip-requirements persp-mode paradox orgit org org-pomodoro alert org-plus-contrib open-junk-file neotree move-text markdown-toc magit-gitflow macrostep less-css-mode json-mode js2-refactor indent-guide hydra hl-todo highlight-indentation help-fns+ helm-themes helm-pydoc helm-projectile helm-make helm-descbinds helm-dash helm-ag google-translate git-messenger expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dumb-jump drupal-mode coffee-mode auto-compile auctex anaconda-mode aggressive-indent ace-window ace-link ace-jump-helm-line anzu smartparens evil undo-tree flycheck markdown-mode request helm helm-core avy async projectile yasnippet php-mode f js2-mode dash s spacemacs-theme yapfify web-beautify volatile-highlights vi-tilde-fringe uuidgen tagedit stickyfunc-enhance spinner smeargle slim-mode shell-pop seq scss-mode reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pyenv-mode py-isort pug-mode powerline popwin popup phpunit phpcbf php-extras php-auto-yasnippets pcre2el pbcopy packed osx-trash osx-dictionary org-projectile org-present org-download org-bullets multiple-cursors multi-term mmm-mode lorem-ipsum log4e livid-mode live-py-mode linum-relative link-hint let-alist launchctl json-snatcher json-reformat js-doc info+ ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-flx helm-css-scss haml-mode goto-chg golden-ratio gnuplot gntp gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z esh-help elisp-slime-nav edit-server diminish deft dash-at-point cython-mode csv-mode column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol adaptive-wrap))))
+    (bind-map skewer-mode tide yaml-mode typescript-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby pcache highlight beeminder hide-comnt lua-mode xterm-color ws-butler window-numbering which-key web-mode use-package toc-org tern srefactor spaceline sass-mode pytest prodigy pip-requirements persp-mode paradox orgit org org-pomodoro alert org-plus-contrib open-junk-file neotree move-text markdown-toc magit-gitflow macrostep less-css-mode json-mode js2-refactor indent-guide hydra hl-todo highlight-indentation help-fns+ helm-themes helm-pydoc helm-projectile helm-make helm-descbinds helm-dash helm-ag google-translate git-messenger expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dumb-jump drupal-mode coffee-mode auto-compile auctex anaconda-mode aggressive-indent ace-window ace-link ace-jump-helm-line anzu smartparens evil undo-tree flycheck markdown-mode request helm helm-core avy async projectile yasnippet php-mode f js2-mode dash s spacemacs-theme yapfify web-beautify volatile-highlights vi-tilde-fringe uuidgen tagedit stickyfunc-enhance spinner smeargle slim-mode shell-pop seq scss-mode reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pyenv-mode py-isort pug-mode powerline popwin popup phpunit phpcbf php-extras php-auto-yasnippets pcre2el pbcopy packed osx-trash osx-dictionary org-projectile org-present org-download org-bullets multiple-cursors multi-term mmm-mode lorem-ipsum log4e livid-mode live-py-mode linum-relative link-hint let-alist launchctl json-snatcher json-reformat js-doc info+ ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-flx helm-css-scss haml-mode goto-chg golden-ratio gnuplot gntp gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z esh-help elisp-slime-nav edit-server diminish deft dash-at-point cython-mode csv-mode column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol adaptive-wrap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
