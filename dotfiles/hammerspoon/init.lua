@@ -8,7 +8,7 @@ singleapps = {
   {'r', 'Emacs'},
   {'t', 'Telegram'},
   {'y', 'YNAB 4'},
-  {'i', 'iTunes'},
+  {'i', 'iBooks'},
   {'p', 'Preview'},
   {'a', 'Adium'},
   {'s', 'Slack'},
