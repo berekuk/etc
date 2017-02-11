@@ -41,6 +41,7 @@ values."
      php
      csv
      x-org
+     haskell
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -254,6 +255,10 @@ user code here.  The exception is org related code, which should be placed in
   (interactive)
   (find-file "~/Dropbox/org/notes.org"))
 
+(defun mm/open-log ()
+  (interactive)
+  (find-file "~/Dropbox/org/log.org"))
+
 (defun mm/open-index ()
   (interactive)
   (find-file "~/Dropbox/org/index.org"))
@@ -298,11 +303,14 @@ layers configuration. You are free to put any user code."
     :cwd "/Users/berekuk/coding/lesswrong-ru/website")
   (add-to-list 'auto-mode-alist
                '("/Dropbox/ref/.*\\.txt\\'" . org-mode))
+  (add-to-list 'auto-mode-alist
+               '("\\.js\\'" . react-mode))
   (global-set-key (kbd "s-a") 'mm/open-agenda)
   (global-set-key (kbd "s-i") 'mm/open-inbox)
   (global-set-key (kbd "s-k") 'mm/open-todo)
   (global-set-key (kbd "s-d") 'mm/open-index)
   (global-set-key (kbd "s-n") 'mm/open-notes)
+  (global-set-key (kbd "s-l") 'mm/open-log)
 
   (require 'beeminder)
   (load-file "~/.spacemacs.private") ; includes beeminder token
@@ -320,6 +328,7 @@ layers configuration. You are free to put any user code."
                       "/Users/berekuk/Dropbox/org/media.org")
    org-refile-targets '((mm/org-all-files
                          :maxlevel . 1))
+   org-log-refile 'time
    org-default-notes-file "~/Dropbox/org/inbox.org"
    org-return-follows-link t
    deft-directory "~/Dropbox/org/ref"
@@ -331,6 +340,7 @@ layers configuration. You are free to put any user code."
    org-agenda-sticky t
    org-extend-today-until 5
    org-startup-indented t
+   org-use-property-inheritance '("LOGGING")
    org-log-into-drawer t
    org-archive-location "~/Dropbox/archive/all.org::"
    org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled)
@@ -356,6 +366,16 @@ layers configuration. You are free to put any user code."
                             entry
                             (file+olp "~/Dropbox/org/inbox.org" "Links")
                             "* %c\n")
+                           ("n" "Today")
+                           ("np" "Personal"
+                            entry
+                            (file+olp "~/Dropbox/org/todo.org" "Личное насущное")
+                            "* TODO %?\nSCHEDULED: %t\n\n"
+                            :prepend t)
+                           ("nk" "Kocherga"
+                            entry
+                            (file+olp "~/Dropbox/org/todo.org" "Кочерга - насущное")
+                            "* TODO %?\nSCHEDULED: %t\n\n")
                            ("l" "Log")
                            ("ld" "Diary"
                             entry
@@ -376,9 +396,15 @@ layers configuration. You are free to put any user code."
   ;; via https://emacs.stackexchange.com/questions/2871/keeping-my-org-files-in-sync-across-multiple-computers
   (add-hook 'after-save-hook 'org-save-all-org-buffers)
 
-  (setq-default
+  (setq
+   js2-mode-show-parse-errors nil
+   js2-mode-show-strict-warnings nil
    js2-basic-offset 2
    js-indent-level 2)
+  (add-hook 'js2-init-hook
+            '(lambda ()
+               (setq next-error-function 'flycheck-next-error)))
+
 ;  (add-hook 'evil-insert-state-entry-hook
 ;            (lambda ()
 ;              (if mm/insert-keylayout
@@ -406,7 +432,7 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org-trello dash-functional request-deferred deferred bind-map skewer-mode tide yaml-mode typescript-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby pcache highlight beeminder hide-comnt lua-mode xterm-color ws-butler window-numbering which-key web-mode use-package toc-org tern srefactor spaceline sass-mode pytest prodigy pip-requirements persp-mode paradox orgit org org-pomodoro alert org-plus-contrib open-junk-file neotree move-text markdown-toc magit-gitflow macrostep less-css-mode json-mode js2-refactor indent-guide hydra hl-todo highlight-indentation help-fns+ helm-themes helm-pydoc helm-projectile helm-make helm-descbinds helm-dash helm-ag google-translate git-messenger expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dumb-jump drupal-mode coffee-mode auto-compile auctex anaconda-mode aggressive-indent ace-window ace-link ace-jump-helm-line anzu smartparens evil undo-tree flycheck markdown-mode request helm helm-core avy async projectile yasnippet php-mode f js2-mode dash s spacemacs-theme yapfify web-beautify volatile-highlights vi-tilde-fringe uuidgen tagedit stickyfunc-enhance spinner smeargle slim-mode shell-pop seq scss-mode reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pyenv-mode py-isort pug-mode powerline popwin popup phpunit phpcbf php-extras php-auto-yasnippets pcre2el pbcopy packed osx-trash osx-dictionary org-projectile org-present org-download org-bullets multiple-cursors multi-term mmm-mode lorem-ipsum log4e livid-mode live-py-mode linum-relative link-hint let-alist launchctl json-snatcher json-reformat js-doc info+ ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-flx helm-css-scss haml-mode goto-chg golden-ratio gnuplot gntp gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z esh-help elisp-slime-nav edit-server diminish deft dash-at-point cython-mode csv-mode column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol adaptive-wrap))))
+    (simple-httpd intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc company haskell-mode cmm-mode org-trello dash-functional request-deferred deferred bind-map skewer-mode tide yaml-mode typescript-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby pcache highlight beeminder hide-comnt lua-mode xterm-color ws-butler window-numbering which-key web-mode use-package toc-org tern srefactor spaceline sass-mode pytest prodigy pip-requirements persp-mode paradox orgit org org-pomodoro alert org-plus-contrib open-junk-file neotree move-text markdown-toc magit-gitflow macrostep less-css-mode json-mode js2-refactor indent-guide hydra hl-todo highlight-indentation help-fns+ helm-themes helm-pydoc helm-projectile helm-make helm-descbinds helm-dash helm-ag google-translate git-messenger expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dumb-jump drupal-mode coffee-mode auto-compile auctex anaconda-mode aggressive-indent ace-window ace-link ace-jump-helm-line anzu smartparens evil undo-tree flycheck markdown-mode request helm helm-core avy async projectile yasnippet php-mode f js2-mode dash s spacemacs-theme yapfify web-beautify volatile-highlights vi-tilde-fringe uuidgen tagedit stickyfunc-enhance spinner smeargle slim-mode shell-pop seq scss-mode reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pyenv-mode py-isort pug-mode powerline popwin popup phpunit phpcbf php-extras php-auto-yasnippets pcre2el pbcopy packed osx-trash osx-dictionary org-projectile org-present org-download org-bullets multiple-cursors multi-term mmm-mode lorem-ipsum log4e livid-mode live-py-mode linum-relative link-hint let-alist launchctl json-snatcher json-reformat js-doc info+ ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-flx helm-css-scss haml-mode goto-chg golden-ratio gnuplot gntp gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z esh-help elisp-slime-nav edit-server diminish deft dash-at-point cython-mode csv-mode column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol adaptive-wrap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
