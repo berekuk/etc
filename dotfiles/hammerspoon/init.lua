@@ -24,7 +24,6 @@ singleapps = {
   {'2', 'Anki'},
   {'5', 'Kindle'},
   {'0', 'Activity Monitor'},
-  {'space', 'Safari'}
 }
 
 launch = function(appname)
