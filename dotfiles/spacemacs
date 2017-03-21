@@ -47,7 +47,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(beeminder)
+   dotspacemacs-additional-packages '(
+                                      beeminder
+                                      ox-reveal)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -243,35 +245,6 @@ user code here.  The exception is org related code, which should be placed in
 `dotspacemacs/user-config'."
   )
 
-(defun mm/open-inbox ()
-  (interactive)
-  (find-file "~/Dropbox/org/inbox.org"))
-
-(defun mm/open-todo ()
-  (interactive)
-  (find-file "~/Dropbox/org/todo.org"))
-
-(defun mm/open-notes ()
-  (interactive)
-  (find-file "~/Dropbox/org/notes.org"))
-
-(defun mm/open-log ()
-  (interactive)
-  (find-file "~/Dropbox/org/log.org"))
-
-(defun mm/open-index ()
-  (interactive)
-  (find-file "~/Dropbox/org/index.org"))
-
-(defun mm/open-agenda (&optional arg)
-  (interactive "P")
-  (org-agenda arg "p")
-  (delete-other-windows))
-
-(defun mm/org-all-files ()
-  (directory-files-recursively "~/Dropbox/org"
-                               "\.org$"))
-
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -305,12 +278,27 @@ layers configuration. You are free to put any user code."
                '("/Dropbox/ref/.*\\.txt\\'" . org-mode))
   (add-to-list 'auto-mode-alist
                '("\\.js\\'" . react-mode))
+
+  (defun mm/open-org (filename)
+    (find-file (concat "~/Dropbox/org/" filename ".org")))
+
+  (defun mm/open-agenda (&optional arg)
+    (interactive "P")
+    (org-agenda arg "p")
+    (delete-other-windows))
+
+  (defun mm/org-all-files ()
+    (directory-files-recursively "~/Dropbox/org"
+                                 "\.org$"))
+
   (global-set-key (kbd "s-a") 'mm/open-agenda)
-  (global-set-key (kbd "s-i") 'mm/open-inbox)
-  (global-set-key (kbd "s-k") 'mm/open-todo)
-  (global-set-key (kbd "s-d") 'mm/open-index)
-  (global-set-key (kbd "s-n") 'mm/open-notes)
-  (global-set-key (kbd "s-l") 'mm/open-log)
+  (global-set-key (kbd "s-i") (lambda() (interactive) (mm/open-org "inbox")))
+  (global-set-key (kbd "s-k") (lambda() (interactive) (mm/open-org "todo")))
+  (global-set-key (kbd "s-d") (lambda() (interactive) (mm/open-org "index")))
+  (global-set-key (kbd "s-n") (lambda() (interactive) (mm/open-org "notes")))
+  (global-set-key (kbd "s-m") (lambda() (interactive) (mm/open-org "media")))
+  (global-set-key (kbd "s-l") (lambda() (interactive) (mm/open-org "log")))
+  (global-set-key (kbd "s-w") (lambda() (interactive) (mm/open-org "workshops")))
 
   (require 'beeminder)
   (load-file "~/.spacemacs.private") ; includes beeminder token
@@ -326,6 +314,8 @@ layers configuration. You are free to put any user code."
                       "/Users/berekuk/Dropbox/org/inbox.org"
                       "/Users/berekuk/Dropbox/org/notes.org"
                       "/Users/berekuk/Dropbox/org/media.org")
+   org-agenda-text-search-extra-files (append (file-expand-wildcards "/Users/berekuk/Dropbox/org/ref/*.org")
+                                              (file-expand-wildcards "/Users/berekuk/Dropbox/org/notes/*.org"))
    org-refile-targets '((mm/org-all-files
                          :maxlevel . 1))
    org-log-refile 'time
@@ -369,12 +359,12 @@ layers configuration. You are free to put any user code."
                            ("n" "Today")
                            ("np" "Personal"
                             entry
-                            (file+olp "~/Dropbox/org/todo.org" "Личное насущное")
+                            (file+olp "~/Dropbox/org/todo.org" "Личное насущное (Personal current)")
                             "* TODO %?\nSCHEDULED: %t\n\n"
                             :prepend t)
                            ("nk" "Kocherga"
                             entry
-                            (file+olp "~/Dropbox/org/todo.org" "Кочерга - насущное")
+                            (file+olp "~/Dropbox/org/todo.org" "Кочерга насущное (Kocherga current)")
                             "* TODO %?\nSCHEDULED: %t\n\n")
                            ("l" "Log")
                            ("ld" "Diary"
@@ -432,7 +422,7 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (simple-httpd intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc company haskell-mode cmm-mode org-trello dash-functional request-deferred deferred bind-map skewer-mode tide yaml-mode typescript-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby pcache highlight beeminder hide-comnt lua-mode xterm-color ws-butler window-numbering which-key web-mode use-package toc-org tern srefactor spaceline sass-mode pytest prodigy pip-requirements persp-mode paradox orgit org org-pomodoro alert org-plus-contrib open-junk-file neotree move-text markdown-toc magit-gitflow macrostep less-css-mode json-mode js2-refactor indent-guide hydra hl-todo highlight-indentation help-fns+ helm-themes helm-pydoc helm-projectile helm-make helm-descbinds helm-dash helm-ag google-translate git-messenger expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dumb-jump drupal-mode coffee-mode auto-compile auctex anaconda-mode aggressive-indent ace-window ace-link ace-jump-helm-line anzu smartparens evil undo-tree flycheck markdown-mode request helm helm-core avy async projectile yasnippet php-mode f js2-mode dash s spacemacs-theme yapfify web-beautify volatile-highlights vi-tilde-fringe uuidgen tagedit stickyfunc-enhance spinner smeargle slim-mode shell-pop seq scss-mode reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pyenv-mode py-isort pug-mode powerline popwin popup phpunit phpcbf php-extras php-auto-yasnippets pcre2el pbcopy packed osx-trash osx-dictionary org-projectile org-present org-download org-bullets multiple-cursors multi-term mmm-mode lorem-ipsum log4e livid-mode live-py-mode linum-relative link-hint let-alist launchctl json-snatcher json-reformat js-doc info+ ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-flx helm-css-scss haml-mode goto-chg golden-ratio gnuplot gntp gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z esh-help elisp-slime-nav edit-server diminish deft dash-at-point cython-mode csv-mode column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol adaptive-wrap))))
+    (ox-reveal simple-httpd intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc company haskell-mode cmm-mode org-trello dash-functional request-deferred deferred bind-map skewer-mode tide yaml-mode typescript-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby pcache highlight beeminder hide-comnt lua-mode xterm-color ws-butler window-numbering which-key web-mode use-package toc-org tern srefactor spaceline sass-mode pytest prodigy pip-requirements persp-mode paradox orgit org org-pomodoro alert org-plus-contrib open-junk-file neotree move-text markdown-toc magit-gitflow macrostep less-css-mode json-mode js2-refactor indent-guide hydra hl-todo highlight-indentation help-fns+ helm-themes helm-pydoc helm-projectile helm-make helm-descbinds helm-dash helm-ag google-translate git-messenger expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dumb-jump drupal-mode coffee-mode auto-compile auctex anaconda-mode aggressive-indent ace-window ace-link ace-jump-helm-line anzu smartparens evil undo-tree flycheck markdown-mode request helm helm-core avy async projectile yasnippet php-mode f js2-mode dash s spacemacs-theme yapfify web-beautify volatile-highlights vi-tilde-fringe uuidgen tagedit stickyfunc-enhance spinner smeargle slim-mode shell-pop seq scss-mode reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pyenv-mode py-isort pug-mode powerline popwin popup phpunit phpcbf php-extras php-auto-yasnippets pcre2el pbcopy packed osx-trash osx-dictionary org-projectile org-present org-download org-bullets multiple-cursors multi-term mmm-mode lorem-ipsum log4e livid-mode live-py-mode linum-relative link-hint let-alist launchctl json-snatcher json-reformat js-doc info+ ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-flx helm-css-scss haml-mode goto-chg golden-ratio gnuplot gntp gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z esh-help elisp-slime-nav edit-server diminish deft dash-at-point cython-mode csv-mode column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol adaptive-wrap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
