@@ -11,8 +11,6 @@ fi
 export PATH=$(perl -MList::MoreUtils=firstidx -E '@p = split /:/, $ENV{PATH}; $ub = firstidx { $_ eq "/usr/bin" } @p; $ulb = firstidx { $_ eq "/usr/local/bin" } @p; if (defined $ub and defined $ulb and $ub < $ulb) { ($p[$ub], $p[$ulb]) = ($p[$ulb], $p[$ub]) } say join ":", @p')
 
 export PATH=/usr/local/sbin:$PATH
-export PATH=/usr/local/share/npm/bin:$PATH
-export PATH=/usr/local/heroku/bin:$PATH
 export PATH=$PATH:./node_modules/.bin
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
