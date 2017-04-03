@@ -12,6 +12,7 @@ singleapps = {
   {'p', 'Preview'},
   {'a', 'Adium'},
   {'d', 'Dash'},
+  {'s', 'Slack'},
   {'f', 'Finder'},
   {'z', 'Adobe InDesign CC 2017'},
   {'x', 'Pixelmator'},
