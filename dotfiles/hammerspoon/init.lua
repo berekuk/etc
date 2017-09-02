@@ -23,8 +23,11 @@ singleapps = {
   {'b', 'brainworkshop'},
   {'1', '1Password 6'},
   {'2', 'Anki'},
+  {'3', 'Transmission'},
   {'5', 'Kindle'},
+  {'7', 'iTunes'},
   {'0', 'Activity Monitor'},
+  {'9', 'System preferences'},
 }
 
 launch = function(appname)
