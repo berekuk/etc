@@ -8,11 +8,14 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 # put /usr/local/bin before /usr/bin
-export PATH=$(perl -MList::MoreUtils=firstidx -E '@p = split /:/, $ENV{PATH}; $ub = firstidx { $_ eq "/usr/bin" } @p; $ulb = firstidx { $_ eq "/usr/local/bin" } @p; if (defined $ub and defined $ulb and $ub < $ulb) { ($p[$ub], $p[$ulb]) = ($p[$ulb], $p[$ub]) } say join ":", @p')
+if [[ ! $PATH =~ /usr/local/bin:.*/usr/bin ]]; then
+    export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+fi
 
-export PATH=/usr/local/sbin:$PATH
-export PATH=$PATH:./node_modules/.bin
+if [[ ! ":$PATH:" =~ :\./node_modules/\.bin: ]]; then
+    export PATH=$PATH:./node_modules/.bin
+fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
-eval "$(docker-machine env dinghy)"
+# eval "$(docker-machine env dinghy)"

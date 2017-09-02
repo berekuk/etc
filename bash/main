@@ -1,4 +1,4 @@
-# vim: ft=sh
+ vim: ft=sh
 
 # settings for non-interactive mode
 # (use these sparingly, they can slow execution of GUI apps)
@@ -52,9 +52,12 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-export PATH=$PATH:~/bin         # my scripts
+# my scripts
+if [[ ! ":$PATH:" =~ ":$HOME/bin:" ]]; then
+  export PATH=$PATH:~/bin
+fi
 export MYSQL_PS1='[\h] \d> '    # host and DB in mysql prompt, very helpful
-export EDITOR='vim'             # default editor everywhere
+export EDITOR='emacsclient'     # default editor everywhere
 export LESSCHARSET='utf-8'      # fixing crackozabrs
 
 # OS-specific
@@ -67,12 +70,6 @@ if [ $uname = Darwin ]; then
 fi
 if [ $uname = FreeBSD ]; then
     . ~/etc/bash/freebsd
-fi
-
-if (type dnsdomainname 2>/dev/null >/dev/null) && dnsdomainname | perl -e '$_ = <>; /^yandex\.ru|yandex-team\.ru|feeds\.yandex\.net|dev\.yandex\.net$/ or exit 1'; then
-    . ~/etc/bash/yandex
-elif (type domainname 2>/dev/null >/dev/null) && domainname | perl -e '$_ = <>; /^yandex\.ru|yandex-team\.ru|feeds\.yandex\.net|dev\.yandex\.net$/ or exit 1'; then
-    . ~/etc/bash/yandex
 fi
 
 # handy functions for greps
@@ -90,14 +87,12 @@ export FTP_PASSIVE=1 # always useful when using cpan
 
 . ~/etc/bash/aliases
 
-if [ -f ~/etc/bash/local ]; then
+if [[ -f ~/etc/bash/local ]]; then
     . ~/etc/bash/local
 fi
 
-if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
-    . ~/perl5/perlbrew/etc/bashrc
-fi
-
 if (type rbenv 2>/dev/null >/dev/null); then
-    eval "$(rbenv init -)"
+    if [[ ! $PATH =~ "rbenv" ]]; then
+        eval "$(rbenv init -)"
+    fi
 fi
