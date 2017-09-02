@@ -250,7 +250,20 @@ user code here.  The exception is org related code, which should be placed in
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (setq-default
+   js2-mode-show-parse-errors nil
+   js2-mode-show-strict-warnings nil
+   ;; js2-mode
+   js2-basic-offset 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
+
   (remove-hook 'prog-mode-hook #'smartparens-mode)
+
   (prodigy-define-tag :name 'debug
     :env '(("DEBUG" "1")))
   (prodigy-define-service :name "Kocherga admin server"
@@ -279,64 +292,78 @@ layers configuration. You are free to put any user code."
   (add-to-list 'auto-mode-alist
                '("\\.js\\'" . react-mode))
 
+  (setq org-directory "~/Dropbox/org")
+  (defun mm/org-file (filename)
+    (concat org-directory "/" filename ".org"))
   (defun mm/open-org (filename)
-    (find-file (concat "~/Dropbox/org/" filename ".org")))
+    (find-file (mm/org-file filename)))
 
-  (defun mm/open-agenda (&optional arg)
+  (defun mm/open-agenda (id)
     (interactive "P")
-    (org-agenda arg "p")
+    (org-agenda nil id)
     (delete-other-windows))
 
   (defun mm/org-all-files ()
-    (directory-files-recursively "~/Dropbox/org"
-                                 "\.org$"))
+    (directory-files-recursively org-directory "\.org$"))
 
-  (global-set-key (kbd "s-a") 'mm/open-agenda)
+  (global-set-key (kbd "s-1") (lambda() (interactive) (mm/open-agenda "1")))
+  (global-set-key (kbd "s-2") (lambda() (interactive) (mm/open-agenda "2")))
+  (global-set-key (kbd "s-3") (lambda() (interactive) (mm/open-agenda "3")))
+  (global-set-key (kbd "s-0") (lambda() (interactive) (mm/open-agenda "0")))
   (global-set-key (kbd "s-i") (lambda() (interactive) (mm/open-org "inbox")))
-  (global-set-key (kbd "s-k") (lambda() (interactive) (mm/open-org "todo")))
+  (global-set-key (kbd "s-k") (lambda() (interactive) (mm/open-org "kocherga")))
+  (global-set-key (kbd "s-p") (lambda() (interactive) (mm/open-org "personal/personal-tasks")))
+  (global-set-key (kbd "s-t") (lambda() (interactive) (mm/open-org "team")))
   (global-set-key (kbd "s-d") (lambda() (interactive) (mm/open-org "index")))
-  (global-set-key (kbd "s-n") (lambda() (interactive) (mm/open-org "notes")))
-  (global-set-key (kbd "s-m") (lambda() (interactive) (mm/open-org "media")))
-  (global-set-key (kbd "s-l") (lambda() (interactive) (mm/open-org "log")))
+  (global-set-key (kbd "s-s") (lambda() (interactive) (mm/open-org "personal/systems")))
+  (global-set-key (kbd "s-m") (lambda() (interactive) (mm/open-org "notes/media")))
+  (global-set-key (kbd "s-g") (lambda() (interactive) (mm/open-org "log")))
+  (global-set-key (kbd "s-l") (lambda() (interactive) (mm/open-org "rationality")))
+  (global-set-key (kbd "s-o") (lambda() (interactive) (mm/open-org "world")))
   (global-set-key (kbd "s-w") (lambda() (interactive) (mm/open-org "workshops")))
+  (global-set-key (kbd "s-r") (lambda() (interactive) (mm/open-org "writing")))
 
   (require 'beeminder)
   (load-file "~/.spacemacs.private") ; includes beeminder token
+
+  (setq mm/publish-styles "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/readtheorg/css/htmlize.css\"/>
+                          <link rel=\"stylesheet\" type=\"text/css\" href=\"styles/readtheorg/css/readtheorg.css\"/>
+                          <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js\"></script>
+                          <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js\"></script>
+                          <script type=\"text/javascript\" src=\"styles/lib/js/jquery.stickytableheaders.min.js\"></script>
+                          <script type=\"text/javascript\" src=\"styles/readtheorg/js/readtheorg.js\"></script>")
 
   (setq
    mm/insert-keylayout nil
    calendar-longitude 37.6173
    calendar-latitude 55.7558
-   org-directory "~/Dropbox/org"
-   org-agenda-files '("/Users/berekuk/Dropbox/org/todo.org"
-                      "/Users/berekuk/Dropbox/org/workshops.org"
-                      "/Users/berekuk/Dropbox/org/writing.org"
-                      "/Users/berekuk/Dropbox/org/inbox.org"
-                      "/Users/berekuk/Dropbox/org/notes.org"
-                      "/Users/berekuk/Dropbox/org/media.org")
-   org-agenda-text-search-extra-files (append (file-expand-wildcards "/Users/berekuk/Dropbox/org/ref/*.org")
-                                              (file-expand-wildcards "/Users/berekuk/Dropbox/org/notes/*.org"))
+   org-agenda-files (mapcar (lambda(f) (mm/org-file f))
+                            '("kocherga" "personal/personal-tasks" "workshops" "writing" "inbox" "rationality"))
+   org-agenda-text-search-extra-files (append (file-expand-wildcards (concat org-directory "*/*.org")))
    org-refile-targets '((mm/org-all-files
                          :maxlevel . 1))
    org-log-refile 'time
-   org-default-notes-file "~/Dropbox/org/inbox.org"
+   org-default-notes-file (mm/org-file "inbox")
    org-return-follows-link t
-   deft-directory "~/Dropbox/org/ref"
+   deft-directory (concat org-directory "/ref")
    org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "DELEGATED(e)"
                                  "|" "DONE(d)" "CANCELED(c)" "MEETING(m)"))
+   org-tag-alist '(("@pion" . ?p)
+                   ("@anybody" . ?a)
+                   ("5m" . ?5))
    org-enforce-todo-dependencies t
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
-   org-agenda-sticky t
+   org-agenda-sticky nil
    org-extend-today-until 5
    org-startup-indented t
    org-use-property-inheritance '("LOGGING")
    org-log-into-drawer t
    org-archive-location "~/Dropbox/archive/all.org::"
    org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled)
-   org-columns-default-format "#+COLUMNS: %EFFORT %TODO %ITEM"
+   org-columns-default-format "#+COLUMNS: %EFFORT %TODO %PRIORITY %ITEM"
    org-agenda-custom-commands '(
-                                ("p" "Main agenda"
+                                ("0" "Main agenda"
                                  ((agenda ""
                                           (
                                            (org-agenda-ndays 1)))
@@ -344,74 +371,85 @@ layers configuration. You are free to put any user code."
                                              ((org-agenda-overriding-header "Reading")))
                                   (tags-todo "pion/-WAITING"
                                              ((org-agenda-overriding-header "Talk to Pion")))))
-                                ("n" "Choose next actions"
-                                 ((todo "TODO")))
+                                ("1" "Daily agenda"
+                                 ((agenda "" ((org-agenda-span 'day)))))
+                                ("2" "Media"
+                                 ((tags-todo "media-SCHEDULED>\"<today>\"/TODO" ((org-agenda-overriding-header "Reading")))))
+                                ("3" "Delegated and waiting"
+                                 ((tags-todo "@pion/TODO" ((org-agenda-overriding-header "Delegate to Pion")))
+                                  (tags-todo "@anybody/TODO" ((org-agenda-overriding-header "Delegate to anybody")))
+                                  (todo "DELEGATED" ((org-agenda-overriding-header "Delegated")))
+                                  (todo "WAITING" ((org-agenda-overriding-header "Waiting")))))
                                 ("k" "In kocherga"
                                  ((tags-todo "@kocherga/-WAITING"))))
    org-capture-templates '(("t" "Todo"
                             entry
-                            (file+olp "~/Dropbox/org/inbox.org" "Inbox")
-                            "* TODO %?\n")
+                            (file+olp (mm/org-file "inbox") "Inbox")
+                            "* TODO %?\n\n")
                            ("u" "Link"
                             entry
-                            (file+olp "~/Dropbox/org/inbox.org" "Links")
-                            "* %c\n")
+                            (file+olp (mm/org-file "inbox") "Links")
+                            "* %a\n%i\n")
+                           ("q" "Link"
+                            entry
+                            (file+olp (mm/org-file "inbox") "Links")
+                            "* %a\n%i\n" :immediate-finish t)
+                           ("w" "Writing topic"
+                            entry
+                            (file+olp (mm/org-file "writing") "Темы")
+                            "* %?\n")
                            ("n" "Today")
                            ("np" "Personal"
                             entry
-                            (file+olp "~/Dropbox/org/todo.org" "Личное насущное (Personal current)")
+                            (file+olp (mm/org-file "personal/personal-tasks") "Личное насущное (Personal current)")
                             "* TODO %?\nSCHEDULED: %t\n\n"
                             :prepend t)
                            ("nk" "Kocherga"
                             entry
-                            (file+olp "~/Dropbox/org/todo.org" "Кочерга насущное (Kocherga current)")
+                            (file+olp (mm/org-file "kocherga") "Кочерга насущное (Kocherga current)")
                             "* TODO %?\nSCHEDULED: %t\n\n")
                            ("l" "Log")
                            ("ld" "Diary"
                             entry
-                            (file+datetree "~/Dropbox/org/diary.org")
+                            (file+datetree (mm/org-file "diary"))
                             "* %?\n")
                            ("lr" "Log running"
                             table-line
-                            (file+olp "~/Dropbox/org/log.org" "Running")
+                            (file+olp (mm/org-file "log") "Running")
                             "| %t | %^{Distance} | %^{Time} |\n"
                             :immediate-finish)
                           ("ls" "Log stepper"
                             table-line
-                            (file+olp "~/Dropbox/org/log.org" "Stepper")
+                            (file+olp (mm/org-file "log") "Stepper")
                             "| %t | %^{Distance} | %^{Time} |\n"
                             :immediate-finish))
+
+   org-publish-project-alist `(("kocherga"
+                                :base-directory org-directory
+                                :publishing-directory "~/Google Drive/АНТИКАФЕ/org"
+                                :base-extension "no-such-extension"
+                                :include ("kocherga.org")
+                                :section-numbers nil
+                                :with-toc t
+                                :publishing-function org-html-publish-to-html
+                                :html-head ,mm/publish-styles))
+
+   org-mobile-directory "~/Dropbox/Apps/MobileOrg"
+   org-mobile-inbox-for-pull (mm/org-file "inbox")
+   org-mobile-force-id-on-agenda-items nil
+
    org-stuck-projects '("+PROJECT" ("NEXT"))
    org-tags-exclude-from-inheritance '("PROJECT"))
   ;; via https://emacs.stackexchange.com/questions/2871/keeping-my-org-files-in-sync-across-multiple-computers
   (add-hook 'after-save-hook 'org-save-all-org-buffers)
 
-  (setq
-   js2-mode-show-parse-errors nil
-   js2-mode-show-strict-warnings nil
-   js2-basic-offset 2
-   js-indent-level 2)
   (add-hook 'js2-init-hook
             '(lambda ()
                (setq next-error-function 'flycheck-next-error)))
 
-;  (add-hook 'evil-insert-state-entry-hook
-;            (lambda ()
-;              (if mm/insert-keylayout
-;                  (progn
-;                    (call-process "issw" nil nil nil mm/insert-keylayout)
-;                    (print "hello"))
-;                nil)))
-;  (add-hook 'evil-insert-state-exit-hook
-;            (lambda ()
-;              (progn
-;                (setq mm/insert-keylayout
-;                      (replace-regexp-in-string
-;                       "\n\\'"
-;                       ""
-;                       (shell-command-to-string "issw")))
-;                (call-process "issw" nil nil nil "com.apple.keylayout.US"))))
-  (mm/open-agenda))
+  (global-visual-line-mode)
+
+  (mm/open-agenda "1"))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -422,7 +460,7 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ox-reveal simple-httpd intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc company haskell-mode cmm-mode org-trello dash-functional request-deferred deferred bind-map skewer-mode tide yaml-mode typescript-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby pcache highlight beeminder hide-comnt lua-mode xterm-color ws-butler window-numbering which-key web-mode use-package toc-org tern srefactor spaceline sass-mode pytest prodigy pip-requirements persp-mode paradox orgit org org-pomodoro alert org-plus-contrib open-junk-file neotree move-text markdown-toc magit-gitflow macrostep less-css-mode json-mode js2-refactor indent-guide hydra hl-todo highlight-indentation help-fns+ helm-themes helm-pydoc helm-projectile helm-make helm-descbinds helm-dash helm-ag google-translate git-messenger expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dumb-jump drupal-mode coffee-mode auto-compile auctex anaconda-mode aggressive-indent ace-window ace-link ace-jump-helm-line anzu smartparens evil undo-tree flycheck markdown-mode request helm helm-core avy async projectile yasnippet php-mode f js2-mode dash s spacemacs-theme yapfify web-beautify volatile-highlights vi-tilde-fringe uuidgen tagedit stickyfunc-enhance spinner smeargle slim-mode shell-pop seq scss-mode reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pyenv-mode py-isort pug-mode powerline popwin popup phpunit phpcbf php-extras php-auto-yasnippets pcre2el pbcopy packed osx-trash osx-dictionary org-projectile org-present org-download org-bullets multiple-cursors multi-term mmm-mode lorem-ipsum log4e livid-mode live-py-mode linum-relative link-hint let-alist launchctl json-snatcher json-reformat js-doc info+ ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-flx helm-css-scss haml-mode goto-chg golden-ratio gnuplot gntp gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z esh-help elisp-slime-nav edit-server diminish deft dash-at-point cython-mode csv-mode column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol adaptive-wrap))))
+    (winum flymd ox-reveal simple-httpd intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc company haskell-mode cmm-mode org-trello dash-functional request-deferred deferred bind-map skewer-mode tide yaml-mode typescript-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby pcache highlight beeminder hide-comnt lua-mode xterm-color ws-butler window-numbering which-key web-mode use-package toc-org tern srefactor spaceline sass-mode pytest prodigy pip-requirements persp-mode paradox orgit org org-pomodoro alert org-plus-contrib open-junk-file neotree move-text markdown-toc magit-gitflow macrostep less-css-mode json-mode js2-refactor indent-guide hydra hl-todo highlight-indentation help-fns+ helm-themes helm-pydoc helm-projectile helm-make helm-descbinds helm-dash helm-ag google-translate git-messenger expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dumb-jump drupal-mode coffee-mode auto-compile auctex anaconda-mode aggressive-indent ace-window ace-link ace-jump-helm-line anzu smartparens evil undo-tree flycheck markdown-mode request helm helm-core avy async projectile yasnippet php-mode f js2-mode dash s spacemacs-theme yapfify web-beautify volatile-highlights vi-tilde-fringe uuidgen tagedit stickyfunc-enhance spinner smeargle slim-mode shell-pop seq scss-mode reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pyenv-mode py-isort pug-mode powerline popwin popup phpunit phpcbf php-extras php-auto-yasnippets pcre2el pbcopy packed osx-trash osx-dictionary org-projectile org-present org-download org-bullets multiple-cursors multi-term mmm-mode lorem-ipsum log4e livid-mode live-py-mode linum-relative link-hint let-alist launchctl json-snatcher json-reformat js-doc info+ ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-flx helm-css-scss haml-mode goto-chg golden-ratio gnuplot gntp gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z esh-help elisp-slime-nav edit-server diminish deft dash-at-point cython-mode csv-mode column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol adaptive-wrap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
