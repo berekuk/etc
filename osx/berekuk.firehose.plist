@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+ <dict>
+  <key>Label</key>
+  <string>berekuk.firehose</string>
+  <key>Program</key>
+  <string>/usr/local/var/pyenv/shims/python3</string>
+  <key>ProgramArguments</key>
+  <array>
+     <string>python3</string>
+     <string>/Users/berekuk/coding/private-tools/scripts/fh</string>
+     <string>collect</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Minute</key>
+    <integer>0</integer>
+    <key>Hour</key>
+    <integer>2</integer>
+  </dict>
+  <key>StandardErrorPath</key>
+  <string>/Users/berekuk/tmp/error.log</string>
+  <key>StandardOutPath</key>
+  <string>/Users/berekuk/tmp/out.log</string>
+ </dict>
+</plist>
