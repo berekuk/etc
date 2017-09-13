@@ -1,4 +1,4 @@
- vim: ft=sh
+# vim: ft=sh
 
 # settings for non-interactive mode
 # (use these sparingly, they can slow execution of GUI apps)
