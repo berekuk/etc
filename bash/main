@@ -1,5 +1,9 @@
 # vim: ft=sh
 
+sort_path() {
+    export PATH=$(echo $PATH | tr ':' '\n' | perl -E 'sub order { local $_ = shift; return 0 if m{^\.}; return 1 if m{^/home/}; return 2 if m{^/Users/}; return 3 if m{^/usr/local}; return 4} print join ":", sort { order($a) <=> order($b) } map { chomp; $_ } <>')
+}
+
 # settings for non-interactive mode
 # (use these sparingly, they can slow execution of GUI apps)
 if [ -f ~/etc/bash/noninteractive ]; then
@@ -7,7 +11,10 @@ if [ -f ~/etc/bash/noninteractive ]; then
 fi
 
 # If not running interactively, don't do anything else
-[ -z "$PS1" ] && return
+if [ -z "$PS1" ]; then
+    sort_path
+    return
+fi
 
 locales=$(locale -a)
 if echo $locales | fgrep -q 'en_US.utf8'; then
@@ -96,3 +103,5 @@ if (type rbenv 2>/dev/null >/dev/null); then
         eval "$(rbenv init -)"
     fi
 fi
+
+sort_path
