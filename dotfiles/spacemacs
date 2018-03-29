@@ -283,6 +283,30 @@ layers configuration. You are free to put any user code."
   (add-to-list 'auto-mode-alist
                '("\\.js\\'" . react-mode))
 
+  (setq mediawiki-site-alist '(("Wikipedia"
+                                "https://en.wikipedia.org/w/"
+                                "username"
+                                "password"
+                                nil
+                                "Main Page")
+                               ("LW"
+                                "https://lesswrong.ru/wiki/"
+                                "berekuk"
+                                nil
+                                nil
+                                "Заглавная страница")
+                               ("Кочерга"
+                               "https://wiki.admin.kocherga.club/"
+                               "Вячеслав Матюхин"
+                               nil
+                               nil
+                               "Заглавная страница")))
+
+  (setq mediawiki-mode-hook
+        (lambda ()
+          (define-key mediawiki-mode-map (kbd "s-o") 'mediawiki-browse)))
+
+
   (setq org-directory "~/Dropbox/org")
   (defun mm/org-file (filename)
     (concat org-directory "/" filename ".org"))
