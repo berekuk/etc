@@ -405,43 +405,43 @@ layers configuration. You are free to put any user code."
                                  ((tags-todo "@kocherga/-WAITING"))))
    org-capture-templates '(("t" "Todo"
                             entry
-                            (file+olp (mm/org-file "inbox") "Inbox")
+                            (file+olp (lambda () (mm/org-file "inbox")) "Inbox")
                             "* TODO %?\n\n")
                            ("u" "Link"
                             entry
-                            (file+olp (mm/org-file "inbox") "Links")
+                            (file+olp (lambda () (mm/org-file "inbox")) "Links")
                             "* %a\n%i\n")
                            ("q" "Link"
                             entry
-                            (file+olp (mm/org-file "inbox") "Links")
+                            (file+olp (lambda () (mm/org-file "inbox")) "Links")
                             "* %a\n%i\n" :immediate-finish t)
                            ("w" "Writing topic"
                             entry
-                            (file+olp (mm/org-file "writing") "Темы")
+                            (file+olp (lambda () (mm/org-file "writing")) "Темы")
                             "* %?\n")
                            ("n" "Today")
                            ("np" "Personal"
                             entry
-                            (file+olp (mm/org-file "personal/personal-tasks") "Личное насущное (Personal current)")
+                            (file+olp (lambda () (mm/org-file "personal/personal-tasks")) "Личное насущное (Personal current)")
                             "* TODO %?\nSCHEDULED: %t\n\n"
                             :prepend t)
                            ("nk" "Kocherga"
                             entry
-                            (file+olp (mm/org-file "kocherga") "Кочерга насущное (Kocherga current)")
+                            (file+olp (lambda () (mm/org-file "kocherga")) "Кочерга насущное (Kocherga current)")
                             "* TODO %?\nSCHEDULED: %t\n\n")
                            ("l" "Log")
                            ("ld" "Diary"
                             entry
-                            (file+datetree (mm/org-file "diary"))
+                            (file+datetree (lambda () (mm/org-file "diary")))
                             "* %?\n")
                            ("lr" "Log running"
                             table-line
-                            (file+olp (mm/org-file "log") "Running")
+                            (file+olp (lambda () (mm/org-file "log")) "Running")
                             "| %t | %^{Distance} | %^{Time} |\n"
                             :immediate-finish)
                           ("ls" "Log stepper"
                             table-line
-                            (file+olp (mm/org-file "log") "Stepper")
+                            (file+olp (lambda () (mm/org-file "log")) "Stepper")
                             "| %t | %^{Distance} | %^{Time} |\n"
                             :immediate-finish))
 
