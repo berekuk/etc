@@ -62,7 +62,7 @@ set wildmode=list:longest " consistent with bash
 set background=dark
 colorscheme base16-default-dark
 
-set directory=~/tmp/vim//
+set directory=~/tmp/vim
 
 " gx opens urls with '?', '&' and ':'.
 set isfname+=?,&,:
