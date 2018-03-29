@@ -359,7 +359,7 @@ layers configuration. You are free to put any user code."
    calendar-longitude 37.6173
    calendar-latitude 55.7558
    org-agenda-files (mapcar (lambda(f) (mm/org-file f))
-                            '("kocherga" "personal/personal-tasks" "workshops" "writing" "inbox" "rationality"))
+                            '("kocherga" "personal/personal-tasks" "workshops" "writing" "inbox" "rationality" "projects"))
    org-agenda-text-search-extra-files (append (file-expand-wildcards (concat org-directory "*/*.org")))
    org-refile-targets '((mm/org-all-files
                          :maxlevel . 1))
