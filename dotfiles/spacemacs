@@ -19,15 +19,15 @@ values."
    dotspacemacs-configuration-layers
    '(
      yaml
-     ;; auto-completion
+     auto-completion
      ;; better-defaults
      emacs-lisp
-     semantic
+     ; semantic
      python
      markdown
      lua
      org
-     latex
+     ; latex
      osx
      chrome
      dash
