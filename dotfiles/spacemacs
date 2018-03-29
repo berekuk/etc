@@ -272,6 +272,9 @@ layers configuration. You are free to put any user code."
 
   (remove-hook 'prog-mode-hook #'smartparens-mode)
 
+  (global-set-key (kbd "s-c") 'evil-escape)
+  (setq-default evil-escape-key-sequence nil)
+
   (prodigy-define-tag :name 'debug
     :env '(("DEBUG" "1")))
   (prodigy-define-service :name "EA lektor server"
