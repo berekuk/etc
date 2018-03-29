@@ -274,27 +274,10 @@ layers configuration. You are free to put any user code."
 
   (prodigy-define-tag :name 'debug
     :env '(("DEBUG" "1")))
-  (prodigy-define-service :name "Kocherga admin server"
-    :command "python"
-    :args '("main.py")
-    :cwd "/Users/berekuk/coding/kocherga/admin")
-  (prodigy-define-service :name "Kocherga admin webpack"
-    :command "webpack-dev-server"
-    :args '("-d")
-    :cwd "/Users/berekuk/coding/kocherga/admin")
-  (prodigy-define-service :name "Kocherga now server"
-    :command "python"
-    :args '("main.py")
-    :tags '(debug)
-    :cwd "/Users/berekuk/coding/kocherga/now")
   (prodigy-define-service :name "EA lektor server"
     :command "lektor"
     :args '("server")
     :cwd "/Users/berekuk/coding/ea/effectivealtruism.ru")
-  (prodigy-define-service :name "LW lektor server"
-    :command "lektor"
-    :args '("server")
-    :cwd "/Users/berekuk/coding/lesswrong-ru/website")
   (add-to-list 'auto-mode-alist
                '("/Dropbox/ref/.*\\.txt\\'" . org-mode))
   (add-to-list 'auto-mode-alist
