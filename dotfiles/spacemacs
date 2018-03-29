@@ -458,6 +458,12 @@ layers configuration. You are free to put any user code."
 
    org-stuck-projects '("+PROJECT" ("NEXT"))
    org-tags-exclude-from-inheritance '("PROJECT"))
+
+  (setq prettier-js-args '(
+                           "--single-quote"
+                           "--trailing-comma" "es5"
+                           ))
+
   ;; via https://emacs.stackexchange.com/questions/2871/keeping-my-org-files-in-sync-across-multiple-computers
   (add-hook 'after-save-hook 'org-save-all-org-buffers)
 
