@@ -465,6 +465,8 @@ layers configuration. You are free to put any user code."
             '(lambda ()
                (setq next-error-function 'flycheck-next-error)))
 
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+
   (global-visual-line-mode)
 
   (mm/open-agenda "1"))
