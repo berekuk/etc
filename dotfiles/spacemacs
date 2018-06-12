@@ -6,7 +6,7 @@
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
 values."
-  (load-library "~/.secrets.el.gpg")
+  (load-library "~/.secrets.el")
 
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
