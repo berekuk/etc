@@ -59,7 +59,8 @@ values."
                                       ox-reveal
                                       prettier-js
                                       add-node-modules-path
-                                      mediawiki)
+                                      mediawiki
+                                      pipenv)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -474,6 +475,8 @@ layers configuration. You are free to put any user code."
                (setq next-error-function 'flycheck-next-error)))
 
   (add-hook 'js2-mode-hook 'prettier-js-mode)
+
+  (add-hook 'python-mode-hook 'pipenv-mode)
 
   (global-visual-line-mode)
 
