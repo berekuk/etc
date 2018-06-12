@@ -279,6 +279,8 @@ layers configuration. You are free to put any user code."
   ; (remove-hook 'prog-mode-hook #'smartparens-mode)
 
   (global-set-key (kbd "s-c") 'evil-escape)
+  (global-set-key (kbd "TAB") 'yas-expand)
+
   (setq-default evil-escape-key-sequence nil)
 
   (add-to-list 'auto-mode-alist
