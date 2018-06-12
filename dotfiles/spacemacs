@@ -299,11 +299,11 @@ layers configuration. You are free to put any user code."
                                 nil
                                 "Заглавная страница")
                                ("Кочерга"
-                               "https://wiki.admin.kocherga.club/"
-                               "Вячеслав Матюхин"
-                               nil
-                               nil
-                               "Заглавная страница")))
+                                "https://wiki.team.kocherga.club/"
+                                "Вячеслав Матюхин"
+                                nil
+                                nil
+                                "Заглавная страница")))
 
   (setq mediawiki-mode-hook
         (lambda ()
