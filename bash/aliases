@@ -26,3 +26,5 @@ alias i='inbox'
 alias k='~/coding/kocherga/kocherga-tools/kocherga-tools.py'
 
 alias vim='emacsclient -n'
+
+alias psh='pipenv shell'
