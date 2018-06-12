@@ -280,12 +280,6 @@ layers configuration. You are free to put any user code."
   (global-set-key (kbd "s-c") 'evil-escape)
   (setq-default evil-escape-key-sequence nil)
 
-  (prodigy-define-tag :name 'debug
-    :env '(("DEBUG" "1")))
-  (prodigy-define-service :name "EA lektor server"
-    :command "lektor"
-    :args '("server")
-    :cwd "/Users/berekuk/coding/ea/effectivealtruism.ru")
   (add-to-list 'auto-mode-alist
                '("/Dropbox/ref/.*\\.txt\\'" . org-mode))
   (add-to-list 'auto-mode-alist
