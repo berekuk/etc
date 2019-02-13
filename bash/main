@@ -46,6 +46,10 @@ else
     PS1=$PS_PREFIX'\$ '
 fi
 
+if [ -n "$VIRTUAL_ENV" ]; then
+    PS1="($(basename $VIRTUAL_ENV)) $PS1"
+fi
+
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
