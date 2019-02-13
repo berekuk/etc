@@ -28,3 +28,5 @@ alias k='~/coding/kocherga/kocherga-tools/kocherga-tools.py'
 alias vim='emacsclient -n'
 
 alias psh='pipenv shell'
+alias loadkeys='ssh-add ~/.ssh/keys/github && ssh-add ~/.ssh/keys/gitlab'
+alias apilog='ssh kocherga.club "sudo journalctl -fu kocherga-api"'
