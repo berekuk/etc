@@ -12,6 +12,14 @@ if [[ ! $PATH =~ /usr/local/bin:.*/usr/bin ]]; then
     export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 fi
 
+if [[ ! $PATH =~ /usr/local/opt/qt/bin: ]]; then
+    export PATH="/usr/local/opt/qt/bin:$PATH"
+fi
+
+if [[ ! $PATH =~ /usr/local/opt/llvm/bin: ]]; then
+  export PATH="/usr/local/opt/llvm/bin:$PATH"
+fi
+
 if [[ ! ":$PATH:" =~ :\./node_modules/\.bin: ]]; then
     export PATH=$PATH:./node_modules/.bin
 fi
