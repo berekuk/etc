@@ -39,7 +39,7 @@ export PAGER=less               # FreeBSD uses 'more' (TODO - should move it to 
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 export LESS="-M-i-R"
 
-PS_PREFIX='\[\e[0;1;33m\]\t \[\e[0;1;32m\]\u@\h\[\e[0m\] \[\e[0;1;34m\]\w\[\e[0m\]'
+PS_PREFIX='\[\e[0;1;32m\]\u@\h\[\e[0m\] \[\e[0;1;34m\]\w\[\e[0m\]'
 if [ -n "`type -t git`" ]; then
     PS1=$PS_PREFIX'\[\e[01;35m\]$(X=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) && echo "[$X]")\[\e[00m\]\$ '
 else
