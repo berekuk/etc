@@ -1,7 +1,7 @@
 # vim: ft=sh
 
 sort_path() {
-    export PATH=$(echo $PATH | tr ':' '\n' | perl -E 'sub order { local $_ = shift; return 0 if m{^\.}; return 1 if m{^/home/}; return 2 if m{^/Users/}; return 3 if m{^/usr/local}; return 4} print join ":", sort { order($a) <=> order($b) } map { chomp; $_ } <>')
+    export PATH=$(echo $PATH | tr ':' '\n' | perl -E 'sub order { local $_ = shift; return 0 if m{^\.}; return 1 if m{^/home/}; return 2 if m{^/Users/}; return 3 if m{^/usr/local/var/pyenv}; return 4 if m{^/usr/local}; return 5} print join ":", sort { order($a) <=> order($b) } map { chomp; $_ } <>')
 }
 
 # settings for non-interactive mode
