@@ -509,6 +509,8 @@ before packages are loaded."
 
   ; (remove-hook 'prog-mode-hook #'smartparens-mode)
 
+  (remove-hook 'python-mode-hook 'importmagic-mode)
+
   (global-set-key (kbd "s-c") 'evil-escape)
   (global-set-key (kbd "TAB") 'yas-expand)
 
@@ -516,8 +518,6 @@ before packages are loaded."
 
   (add-to-list 'auto-mode-alist
                '("/Dropbox/ref/.*\\.txt\\'" . org-mode))
-  (add-to-list 'auto-mode-alist
-               '("\\.js\\'" . react-mode))
 
   (setq mediawiki-site-alist '(("Wikipedia"
                                 "https://en.wikipedia.org/w/"
@@ -715,6 +715,10 @@ end tell")))
                            "--trailing-comma" "es5"
                            ))
 
+  (setq
+   flycheck-python-pycompile-executable "/usr/local/var/pyenv/shims/python"
+  )
+
   ;; via https://emacs.stackexchange.com/questions/2871/keeping-my-org-files-in-sync-across-multiple-computers
   (add-hook 'after-save-hook 'org-save-all-org-buffers)
 
@@ -723,8 +727,8 @@ end tell")))
                (setq next-error-function 'flycheck-next-error)))
 
   (add-hook 'js2-mode-hook 'prettier-js-mode)
-
-  (add-hook 'python-mode-hook 'pipenv-mode)
+  (add-hook 'typescript-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-tsx-mode-hook 'prettier-js-mode)
 
   (global-visual-line-mode)
 
