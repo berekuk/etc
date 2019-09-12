@@ -79,6 +79,7 @@ This function should only modify configuration layer settings."
      typescript
      bibtex
      coq
+     rust
 ;     (wakatime :variables
 ;               wakatime-api-key  my-wakatime-api-key
 ;               wakatime-cli-path "/usr/local/bin/wakatime")
