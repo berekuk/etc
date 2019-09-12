@@ -577,6 +577,21 @@ before packages are loaded."
   (global-set-key (kbd "H-f w") (lambda() (interactive) (mm/open-org "workshops")))
   (global-set-key (kbd "H-f r") (lambda() (interactive) (mm/open-org "writing")))
 
+  (org-add-link-type "message"
+                     (lambda (link)
+                       (shell-command
+                        (concat "open message:" link))))
+  (global-set-key (kbd "H-p") (lambda() (interactive) (do-applescript "tell application \"Mail\"
+	set _sel to get selection
+	set _links to {}
+	repeat with _msg in _sel
+		set _messageURL to \"message://%3c\" & _msg's message id & \"%3e\"
+		set end of _links to _messageURL
+	end repeat
+	set AppleScript's text item delimiters to return
+	set the clipboard to (_links as string)
+end tell")))
+
   (require 'beeminder)
   (load-file "~/.spacemacs.private") ; includes beeminder token
 
@@ -601,10 +616,9 @@ before packages are loaded."
    org-default-notes-file (mm/org-file "inbox")
    org-return-follows-link t
    deft-directory (concat org-directory "/ref")
-   org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "DELEGATED(e)"
-                                 "|" "DONE(d)" "CANCELED(c)" "MEETING(m)"))
-   org-tag-alist '(("@pion" . ?p)
-                   ("@anybody" . ?a)
+   org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "DELEGATED(e)" "MEETING(m)"
+                                 "|" "MOVED(o)" "DONE(d)" "CANCELED(c)"))
+   org-tag-alist '(("@anybody" . ?a)
                    ("5m" . ?5))
    org-enforce-todo-dependencies t
    org-agenda-skip-scheduled-if-done t
@@ -653,16 +667,11 @@ before packages are loaded."
                             entry
                             (file+olp (lambda () (mm/org-file "writing")) "Темы")
                             "* %?\n")
-                           ("n" "Today")
-                           ("np" "Personal"
+                           ("n" "Today"
                             entry
-                            (file+olp (lambda () (mm/org-file "personal/personal-tasks")) "Личное насущное (Personal current)")
+                            (file+olp (lambda () (mm/org-file "projects")) "Сегодня")
                             "* TODO %?\nSCHEDULED: %t\n\n"
                             :prepend t)
-                           ("nk" "Kocherga"
-                            entry
-                            (file+olp (lambda () (mm/org-file "kocherga")) "Кочерга насущное (Kocherga current)")
-                            "* TODO %?\nSCHEDULED: %t\n\n")
                            ("l" "Log")
                            ("ld" "Diary"
                             entry
