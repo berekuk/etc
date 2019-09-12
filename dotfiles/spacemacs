@@ -98,7 +98,8 @@ This function should only modify configuration layer settings."
                                       prettier-js
                                       add-node-modules-path
                                       mediawiki
-                                      pipenv)
+                                      pipenv
+                                      org-gcal)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -592,7 +593,7 @@ before packages are loaded."
    calendar-latitude 55.7558
    wakatime-python-bin "/usr/local/bin/python3"
    org-agenda-files (mapcar (lambda(f) (mm/org-file f))
-                            '("kocherga" "personal/personal-tasks" "workshops" "writing" "inbox" "rationality" "projects"))
+                            '("kocherga" "personal/personal-tasks" "workshops" "writing" "inbox" "rationality" "projects" "gcal"))
    org-agenda-text-search-extra-files (append (file-expand-wildcards (concat org-directory "*/*.org")))
    org-refile-targets '((mm/org-all-files
                          :maxlevel . 1))
