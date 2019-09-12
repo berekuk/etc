@@ -48,7 +48,8 @@ This function should only modify configuration layer settings."
      emacs-lisp
      ; semantic
      ; neotree
-     python
+     (python :variables
+             python-test-runner 'pytest)
      markdown
      lua
      (org :variables
