@@ -35,8 +35,10 @@ singleapps = {
 }
 
 launch = function(appname)
-  hs.application.launchOrFocus(appname)
---  hs.alert.show("triggered")
+  -- delay = 3
+  -- hs.alert.show("wait 3s")
+  delay = 0
+  hs.timer.doAfter(delay, function() hs.application.launchOrFocus(appname); end)
   k.triggered = true
 end
 
