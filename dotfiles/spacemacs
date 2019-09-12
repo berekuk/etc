@@ -475,9 +475,10 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq-default
-   exec-path-from-shell-variables '("PATH" "PYENV_ROOT" "LANG" "LC_ALL")
-  ))
+  (setenv "LANG" "en_US.UTF-8")
+  (setenv "LC_ALL" "en_US.UTF-8")
+  (setenv "WORKON_HOME" "/Users/berekuk/Library/Caches/pypoetry/virtualenvs")
+  (setenv "PYENV_ROOT" "/usr/local/var/pyenv"))
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
