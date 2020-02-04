@@ -23,7 +23,7 @@ alias ra='$EDITOR ~/etc/bash/aliases; source ~/etc/bash/aliases'
 alias ro='routine'
 alias i='inbox'
 
-alias k='~/coding/kocherga/kocherga-tools/kocherga-tools.py'
+alias k='kubectl'
 
 alias vim='emacsclient -n'
 
