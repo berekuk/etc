@@ -7,7 +7,7 @@ singleapps = {
   {'3', 'Transmission'},
   {'4', 'iBooks'},
   {'5', 'Kindle'},
-  {'7', 'iTunes'},
+  {'7', 'Music'},
   {'0', 'Activity Monitor'},
   {'9', 'System preferences'},
   {'w', 'FirefoxNightly'},
