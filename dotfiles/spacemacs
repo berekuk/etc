@@ -83,6 +83,8 @@ This function should only modify configuration layer settings."
      coq
      rust
      terraform
+     shell-scripts
+     docker
 ;     (wakatime :variables
 ;               wakatime-api-key  my-wakatime-api-key
 ;               wakatime-cli-path "/usr/local/bin/wakatime")
@@ -103,7 +105,8 @@ This function should only modify configuration layer settings."
                                       mediawiki
                                       pipenv
                                       org-gcal
-                                      graphql-mode)
+                                      graphql-mode
+                                      zotxt)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -506,6 +509,7 @@ before packages are loaded."
    css-indent-offset 2
    typescript-indent-level 2
    react-indent-level 2
+   tide-server-max-response-length 1048576
    web-mode-markup-indent-offset 2
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
@@ -568,6 +572,7 @@ before packages are loaded."
   (global-set-key (kbd "H-0") (lambda() (interactive) (mm/open-agenda "0")))
   (global-set-key (kbd "H-i") (lambda() (interactive) (mm/open-org "inbox")))
   (global-set-key (kbd "H-j") (lambda() (interactive) (mm/open-org "projects")))
+  (global-set-key (kbd "H-n") (lambda() (interactive) (mm/open-org "notes")))
   (global-set-key (kbd "H-f i") (lambda() (interactive) (mm/open-org "inbox")))
   (global-set-key (kbd "H-f k") (lambda() (interactive) (mm/open-org "kocherga")))
   (global-set-key (kbd "H-f p") (lambda() (interactive) (mm/open-org "personal/personal-tasks")))
@@ -607,10 +612,13 @@ end tell")))
                           <script type=\"text/javascript\" src=\"styles/readtheorg/js/readtheorg.js\"></script>")
 
   (setq
+   vc-follow-symlinks t
+
    mm/insert-keylayout nil
    calendar-longitude 37.6173
    calendar-latitude 55.7558
    wakatime-python-bin "/usr/local/bin/python3"
+   org-id-link-to-org-use-id t
    org-agenda-files (mapcar (lambda(f) (mm/org-file f))
                             '("kocherga" "personal/personal-tasks" "workshops" "writing" "inbox" "rationality" "projects" "gcal"))
    org-agenda-text-search-extra-files (append (file-expand-wildcards (concat org-directory "*/*.org")))
@@ -667,10 +675,14 @@ end tell")))
                             entry
                             (file+olp (lambda () (mm/org-file "inbox")) "Links")
                             "* %a\n%i\n" :immediate-finish t)
-                           ("w" "Writing topic"
+                           ("e" "Ephemeral"
                             entry
-                            (file+olp (lambda () (mm/org-file "writing")) "Темы")
-                            "* %?\n")
+                            (file+olp (lambda () (mm/org-file "notes")) "Эфемерные заметки")
+                            "* %?\n:PROPERTIES:\n:Created: %t\n:END:\n")
+                           ("p" "Permanent/unfiled"
+                            entry
+                            (file+olp (lambda () (mm/org-file "notes")) "Permanent/unfiled")
+                            "* %?\n:PROPERTIES:\n:Created: %t\n:END:\n")
                            ("n" "Today"
                             entry
                             (file+olp (lambda () (mm/org-file "projects")) "Сегодня")
@@ -733,6 +745,20 @@ end tell")))
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'typescript-mode-hook 'prettier-js-mode)
   (add-hook 'typescript-tsx-mode-hook 'prettier-js-mode)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (evil-local-set-key 'normal "(" 'org-store-link)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (evil-local-set-key 'normal ")" 'org-insert-link)))
+
+  ; file:///Users/berekuk/Zotero/storage/8CT9DJPH/a-research-workflow-with-zotero-and-org-mode.html
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (evil-local-set-key 'normal "_" 'org-zotxt-insert-reference-link)))
+  (add-hook 'org-mode-hook (lambda () (org-zotxt-mode 1)))
+
+  (add-hook 'org-capture-mode-hook 'evil-insert-state)
 
   (global-visual-line-mode)
 
