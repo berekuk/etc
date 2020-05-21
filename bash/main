@@ -46,7 +46,7 @@ else
     PS1=$PS_PREFIX'\$ '
 fi
 
-PS1='$([ -n "$VIRTUAL_ENV" ] && [ "$POETRY_ACTIVE" -ne "1" ] && echo "($(basename $VIRTUAL_ENV)) ")'$PS1
+PS1='$([ -n "$VIRTUAL_ENV" ] && [ "$POETRY_ACTIVE" != "1" ] && echo "($(basename $VIRTUAL_ENV)) ")'$PS1
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
