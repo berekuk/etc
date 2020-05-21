@@ -10,8 +10,8 @@ singleapps = {
   {'7', 'Music'},
   {'0', 'Activity Monitor'},
   {'9', 'System preferences'},
-  {'w', 'FirefoxNightly'},
-  {'q', 'Google Chrome'},
+  {'w', 'Firefox'},
+  {'q', 'Visual Studio Code'},
   {'e', 'iTerm'},
   {'r', 'Emacs'},
   {'t', 'Telegram'},
@@ -21,16 +21,16 @@ singleapps = {
   {'s', 'Slack'},
   {'d', 'Dash'},
   {'f', 'Finder'},
-  {'x', 'Microsoft Word'},
+  {'x', 'Zotero'},
   {'c', 'Calendar'},
   {'v', 'VLC'},
-  {'n', 'Notes'},
+  {'n', 'Notion'},
   {'m', 'Mail'},
   {',', 'Messages'},
+  {'z', 'zoom.us'},
 -- Older and disabled:
   -- {'a', 'Adium'},
   -- {'b', 'brainworkshop'},
-  -- {'z', 'Adobe InDesign CC 2017'},
   -- {'q', 'OmniFocus'},
 }
 
@@ -38,7 +38,17 @@ launch = function(appname)
   -- delay = 3
   -- hs.alert.show("wait 3s")
   delay = 0
-  hs.timer.doAfter(delay, function() hs.application.launchOrFocus(appname); end)
+  hs.timer.doAfter(
+    delay,
+    function()
+      local app = hs.application.get(appname)
+      if app then
+        app:activate() -- necessary case for Emacs
+      else
+        hs.application.launchOrFocus(appname)
+      end
+    end
+  )
   k.triggered = true
 end
 
