@@ -106,4 +106,16 @@ if (type rbenv 2>/dev/null >/dev/null); then
     fi
 fi
 
+if [ -d "$HOME/.cargo/bin" ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+if [ -d "$HOME/.poetry/bin" ]; then
+  export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
+if [ -e /Users/berekuk/.nix-profile/etc/profile.d/nix.sh ]; then
+  . /Users/berekuk/.nix-profile/etc/profile.d/nix.sh
+fi
+
 sort_path
