@@ -1,6 +1,16 @@
 # vim: ft=sh
+alias ra='$EDITOR ~/etc/bash/aliases; source ~/etc/bash/aliases'
 
 alias grep='grep --color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore\*'
+alias loadkeys='ssh-add ~/.ssh/keys/github && ssh-add ~/.ssh/keys/gitlab'
+
+alias k='kubectl'
+
+alias vim='emacsclient -n'
+alias code='/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron'
+
+alias psh='pipenv shell'
+alias cdc='cd ~/coding/kocherga/core'
 
 # some common ls aliases
 alias ll='ls -l'
@@ -15,17 +25,6 @@ alias gdc='git diff --color-words'
 alias ga='git add'
 alias gco='git checkout'
 
-alias vs='vagrant ssh'
-alias vp='vagrant provision'
-alias vu='vagrant up'
-
-alias ra='$EDITOR ~/etc/bash/aliases; source ~/etc/bash/aliases'
+# old/unused
 alias ro='routine'
 alias i='inbox'
-
-alias k='kubectl'
-
-alias vim='emacsclient -n'
-
-alias psh='pipenv shell'
-alias loadkeys='ssh-add ~/.ssh/keys/github && ssh-add ~/.ssh/keys/gitlab'
