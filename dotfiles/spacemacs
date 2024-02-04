@@ -87,7 +87,7 @@ This function should only modify configuration layer settings."
      docker
 ;     (wakatime :variables
 ;               wakatime-api-key  my-wakatime-api-key
-;               wakatime-cli-path "/usr/local/bin/wakatime")
+;               wakatime-cli-path "/opt/homebrew/bin/wakatime")
      )
 
    ;; List of additional packages that will be installed without being
@@ -525,7 +525,7 @@ before packages are loaded."
   (setq-default evil-escape-key-sequence nil)
 
   (add-to-list 'auto-mode-alist
-               '("/Dropbox/ref/.*\\.txt\\'" . org-mode))
+               '("/Google Drive/ref/.*\\.txt\\'" . org-mode))
 
   (setq mediawiki-site-alist '(("Wikipedia"
                                 "https://en.wikipedia.org/w/"
@@ -551,7 +551,7 @@ before packages are loaded."
           (define-key mediawiki-mode-map (kbd "s-o") 'mediawiki-browse)))
 
 
-  (setq org-directory "~/Dropbox/org")
+  (setq org-directory "~/Google Drive/org")
   (defun mm/org-file (filename)
     (concat org-directory "/" filename ".org"))
   (defun mm/open-org (filename)
@@ -618,7 +618,7 @@ end tell")))
    mm/insert-keylayout nil
    calendar-longitude 37.6173
    calendar-latitude 55.7558
-   wakatime-python-bin "/usr/local/bin/python3"
+   wakatime-python-bin "/opt/homebrew/bin/python3"
    org-id-link-to-org-use-id t
    org-agenda-files (mapcar (lambda(f) (mm/org-file f))
                             '("kocherga" "personal/personal-tasks" "workshops" "writing" "inbox" "rationality" "projects" "gcal"))
@@ -641,7 +641,7 @@ end tell")))
    org-startup-indented t
    org-use-property-inheritance '("LOGGING")
    org-log-into-drawer t
-   org-archive-location "~/Dropbox/archive/all.org::"
+   org-archive-location "~/Google Drive/archive/all.org::"
    org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled)
    org-columns-default-format "#+COLUMNS: %EFFORT %TODO %PRIORITY %ITEM"
    org-agenda-custom-commands '(
@@ -714,10 +714,6 @@ end tell")))
                                 :with-toc t
                                 :publishing-function org-html-publish-to-html
                                 :html-head ,mm/publish-styles))
-
-   org-mobile-directory "~/Dropbox/Apps/MobileOrg"
-   org-mobile-inbox-for-pull (mm/org-file "inbox")
-   org-mobile-force-id-on-agenda-items nil
 
    org-stuck-projects '("+PROJECT" ("NEXT"))
    org-tags-exclude-from-inheritance '("PROJECT")

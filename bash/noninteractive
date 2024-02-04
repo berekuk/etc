@@ -1,4 +1,4 @@
-export PYENV_ROOT=/usr/local/var/pyenv
+export PYENV_ROOT=/opt/homebrew/var/pyenv
 if [[ ! $PATH =~ "pyenv" ]]; then
     if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 fi

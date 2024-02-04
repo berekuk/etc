@@ -1,80 +1,100 @@
--- A global variable for the Hyper Mode
-k = hs.hotkey.modal.new({}, "F17")
+hs.grid.setMargins({0, 0})
 
-singleapps = {
-  {'1', '1Password 6'},
-  {'2', 'Anki'},
+-- via https://www.lua.org/pil/11.5.html
+function Set (list)
+  local set = {}
+  for _, l in ipairs(list) do set[l] = true end
+  return set
+end
+
+modes = {
+  focused = {
+    apps = Set({ 'Activity Monitor', 'Firefox Developer Edition', 'Visual Studio Code', 'iTerm' }),
+  },
+  art = {
+    apps = Set({ 'Activity Monitor', 'Zoom', 'Obsidian', 'Visual Studio Code' }),
+  },
+  unfocused = {},
+}
+mode = 'unfocused'
+
+apps = {
+  {'1', '1Password'},
+  -- {'2', 'Anki'},
+  -- {'w', 'Chrome'},
   {'3', 'Transmission'},
   {'4', 'iBooks'},
-  {'7', 'Music'},
-  {'0', 'Activity Monitor'},
+  {'7', 'Spotify'},
   {'9', 'System preferences'},
+  {'0', 'Activity Monitor'},
+  {'q', 'Code'},
   {'w', 'Firefox Developer Edition'},
-  {'q', 'Visual Studio Code'},
   {'e', 'iTerm'},
-  {'r', 'Emacs'},
   {'t', 'Telegram'},
+  {'r', 'Obsidian'},
+  {'i', 'Figma'},
+  {'o', 'Poe'},
   {'p', 'Preview'},
+  {'a', 'Actual'},
   {'s', 'Slack'},
+  {'d', 'Discord'},
   {'f', 'Finder'},
+  {'g', 'Godot'},
+  {'h', 'Hammerspoon'},
   {'x', 'Zotero'},
   {'c', 'Calendar'},
-  {'v', 'VLC'},
+  {'v', 'IINA'},
   {'n', 'Notion'},
   {'m', 'Mail'},
   {',', 'Messages'},
   {'z', 'zoom.us'},
--- Older and disabled:
-  -- {'5', 'Kindle'},
-  -- {'a', 'Adium'},
-  -- {'a', 'RStudio'},
-  -- {'b', 'brainworkshop'},
-  -- {'d', 'Dash'},
-  -- {'y', 'VK Messenger'},
-  -- {'q', 'OmniFocus'},
+  {'b', 'BetterTouchTool'},
 }
 
 launch = function(appname)
-  -- delay = 3
-  -- hs.alert.show("wait 3s")
-  delay = 0
-  hs.timer.doAfter(
-    delay,
-    function()
-      local app = hs.application.get(appname)
-      if app then
-        app:activate() -- necessary case for Emacs
-      else
-        hs.application.launchOrFocus(appname)
-      end
-    end
-  )
-  k.triggered = true
-end
-
-hyperBind = function(key, action)
-  k:bind({}, key, action)
-end
-
-for i, app in ipairs(singleapps) do
-  hyperBind(app[1], function() launch(app[2]); end)
-end
-
-hyperBind('return', hs.grid.maximizeWindow)
-
--- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
-pressedF18 = function()
-  k.triggered = false
-  k:enter()
-end
-
--- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
---   send ESCAPE if no other keys are pressed.
-releasedF18 = function()
-  k:exit()
-  if not k.triggered then
-    hs.eventtap.keyStroke({}, 'ESCAPE')
+  print(mode, appname)
+  local app = hs.application.get(appname)
+  if modes[mode] and modes[mode].apps and not modes[mode].apps[appname] then
+    print('forbidden')
+    return
+  end
+  if app then
+    app:activate() -- necessary case for Emacs
+  else
+    hs.application.launchOrFocus(appname)
   end
 end
 
-f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
+hyperBind = function(key, action)
+  hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, key, action)
+end
+
+for i, app in ipairs(apps) do
+  hyperBind(app[1], function() launch(app[2]); end)
+end
+
+
+pickMode = function()
+  cb = function(picked)
+    if picked then
+      mode = picked.text
+      print(mode)
+    end
+  end
+
+  chooserModes = {}
+  i = 1
+  for key, mode in pairs(modes) do
+    chooserModes[i] = {
+      text = key
+    }
+    i = i + 1
+  end
+
+  hs.chooser.new(cb):choices(chooserModes):show()
+end
+
+hyperBind('return', hs.grid.maximizeWindow)
+hyperBind('space', hs.grid.show)
+-- hyperBind('=', hs.reload)
+hyperBind('=', pickMode)

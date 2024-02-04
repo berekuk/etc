@@ -1,23 +1,18 @@
 # vim: ft=sh
-export BLOCKSIZE=1K # can i set this on linux too? will i get confused by it? (see environ(7) for details)
+export BLOCKSIZE=1K # can i set this on linux too? will I get confused by it? (see environ(7) for details)
 export CLICOLOR=1
 export GREP_OPTIONS= # disable GREP_OPTIONS - it conflicts with brew
-
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
 
 # put /usr/local/bin before /usr/bin
 if [[ ! $PATH =~ /usr/local/bin:.*/usr/bin ]]; then
     export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 fi
 
-if [[ ! $PATH =~ /usr/local/opt/qt/bin: ]]; then
-    export PATH="/usr/local/opt/qt/bin:$PATH"
-fi
+BREW_HOME=/opt/homebrew
 
-if [[ ! $PATH =~ /usr/local/opt/llvm/bin: ]]; then
-  export PATH="/usr/local/opt/llvm/bin:$PATH"
+# put /opt/homebrew/bin before /usr/bin
+if [[ ! $PATH =~ $BREW_HOME/bin:.*/usr/bin ]]; then
+    export PATH="$BREW_HOME/sbin:$BREW_HOME/bin:$PATH"
 fi
 
 if [[ ! ":$PATH:" =~ :\./node_modules/\.bin: ]]; then
@@ -26,21 +21,19 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
-# eval "$(docker-machine env dinghy)"
-
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+if [ -e "$BREW_HOME/opt/nvm/nvm.sh" ]; then
+  . "$BREW_HOME/opt/nvm/nvm.sh"
+fi
 
 export WORKON_HOME="$HOME/Library/Caches/pypoetry/virtualenvs"
 
-export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
-if [ -d /Library/kkmserver ]; then
-  export PATH=$PATH:/Library/kkmserver
+export BASH_COMPLETION_COMPAT_DIR="$BREW_HOME/etc/bash_completion.d"
+if [[ -r "$BREW_HOME/etc/profile.d/bash_completion.sh" ]]; then
+  . "$BREW_HOME/etc/profile.d/bash_completion.sh"
 fi
 
-if [ -f /usr/local/opt/kube-ps1/share/kube-ps1.sh ]; then
-  . /usr/local/opt/kube-ps1/share/kube-ps1.sh
+if [ -f $BREW_HOME/opt/kube-ps1/share/kube-ps1.sh ]; then
+  . $BREW_HOME/opt/kube-ps1/share/kube-ps1.sh
   PS1='$(kube_ps1)'$PS1
 fi

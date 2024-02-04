@@ -5,12 +5,14 @@ alias grep='grep --color=tty -d skip --exclude=\*/.svn/\* --exclude=\*.gitignore
 alias loadkeys='ssh-add ~/.ssh/keys/github && ssh-add ~/.ssh/keys/gitlab'
 
 alias k='kubectl'
+complete -F __start_kubectl k
 
 alias vim='emacsclient -n'
-alias code='/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron'
 
 alias psh='pipenv shell'
 alias cdc='cd ~/coding/kocherga/core'
+alias cds='cd ~/coding/quri/squiggle'
+alias cds2='cd ~/coding/quri/squiggle2'
 
 # some common ls aliases
 alias ll='ls -l'
@@ -24,7 +26,14 @@ alias gd='git diff'
 alias gdc='git diff --color-words'
 alias ga='git add'
 alias gco='git checkout'
+alias gb='git branch'
 
 # old/unused
 alias ro='routine'
 alias i='inbox'
+
+alias psql='/Applications/Postgres.app/Contents/Versions/14/bin/psql'
+
+alias edit_migration='open -a /Applications/Visual\ Studio\ Code.app "$(ls -ldt1 prisma/migrations/*/migration.sql | head -1)"'
+
+alias code='code-insiders'

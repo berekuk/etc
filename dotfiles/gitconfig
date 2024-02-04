@@ -17,6 +17,9 @@
     threads = 0
 [diff]
     renameLimit = 0
+    # via https://matklad.github.io/2023/12/31/git-things.html
+    colormoved = "default"
+    colormovedws = "allow-indentation-change"
 [push]
     default = current
 [advice]
@@ -38,8 +41,13 @@
 [github]
     user = berekuk
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [commit]
 	gpgsign = true
+[pull]
+	rebase = true
+[init]
+	defaultBranch = master

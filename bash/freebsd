@@ -1,2 +1,2 @@
-# vim: ft=sh
 alias ls='ls -G'
+export PAGER=less               # FreeBSD uses 'more'

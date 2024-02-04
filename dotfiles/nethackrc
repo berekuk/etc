@@ -1,0 +1,17 @@
+OPTIONS=!autopickup
+OPTIONS=hilite_pet
+OPTIONS=hitpointbar
+OPTIONS=boulder:0
+OPTIONS=msg_window:full
+OPTIONS=showexp
+OPTIONS=statushilites:10
+OPTIONS=time
+OPTIONS=altmeta
+OPTIONS=menucolors
+OPTIONS=paranoid_confirmation: quit pray attack
+
+MENUCOLOR="blessed"=cyan&bold
+MENUCOLOR="cursed"=orange&bold
+MENUCOLOR="uncursed"=green
+MENUCOLOR="gold piece"=yellow
+BIND=M-q:quaff

@@ -1,17 +1,17 @@
 # vim: ft=sh
 
 sort_path() {
-    export PATH=$(echo $PATH | tr ':' '\n' | perl -E 'sub order { local $_ = shift; return 0 if m{^\.}; return 1 if m{^/home/}; return 2 if m{^/Users/}; return 3 if m{^/usr/local/var/pyenv}; return 4 if m{^/usr/local}; return 5} print join ":", sort { order($a) <=> order($b) } map { chomp; $_ } <>')
+    export PATH=$(echo $PATH | tr ':' '\n' | perl -E 'sub order { local $_ = shift; return 0 if m{^\.}; return 1 if m{^/home/}; return 2 if m{^/Users/}; return 3 if m{^/usr/local/var/pyenv}; return 4 if m{^/opt/homebrew}; return 5} print join ":", sort { order($a) <=> order($b) } map { chomp; $_ } <>')
 }
 
 # settings for non-interactive mode
 # (use these sparingly, they can slow execution of GUI apps)
-if [ -f ~/etc/bash/noninteractive ]; then
+if [[ -f ~/etc/bash/noninteractive ]]; then
     . ~/etc/bash/noninteractive
 fi
 
 # If not running interactively, don't do anything else
-if [ -z "$PS1" ]; then
+if [[ -z "$PS1" ]]; then
     sort_path
     return
 fi
@@ -33,8 +33,8 @@ export HISTFILESIZE=10000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# pager
-export PAGER=less               # FreeBSD uses 'more' (TODO - should move it to ~/etc/bash/freebsd?)
+shopt -s globstar
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 export LESS="-M-i-R"
@@ -57,7 +57,7 @@ xterm*|rxvt*)
     ;;
 esac
 
-if [ -f /etc/bash_completion ]; then
+if [[ -f /etc/bash_completion ]]; then
     . /etc/bash_completion
 fi
 
@@ -66,7 +66,7 @@ if [[ ! ":$PATH:" =~ ":$HOME/bin:" ]]; then
   export PATH=$PATH:~/bin
 fi
 export MYSQL_PS1='[\h] \d> '    # host and DB in mysql prompt, very helpful
-export EDITOR='emacsclient'     # default editor everywhere
+export EDITOR='vi'              # default editor everywhere
 export LESSCHARSET='utf-8'      # fixing crackozabrs
 
 # OS-specific
@@ -106,16 +106,12 @@ if (type rbenv 2>/dev/null >/dev/null); then
     fi
 fi
 
-if [ -d "$HOME/.cargo/bin" ]; then
-  export PATH="$HOME/.cargo/bin:$PATH"
+if [[ -d "$HOME/.cargo" ]]; then
+  . "$HOME/.cargo/env"
 fi
 
-if [ -d "$HOME/.poetry/bin" ]; then
+if [[ -d "$HOME/.poetry/bin" ]]; then
   export PATH="$HOME/.poetry/bin:$PATH"
-fi
-
-if [ -e /Users/berekuk/.nix-profile/etc/profile.d/nix.sh ]; then
-  . /Users/berekuk/.nix-profile/etc/profile.d/nix.sh
 fi
 
 sort_path

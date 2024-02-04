@@ -1,1 +1,3 @@
 . ~/etc/bash/main
+
+complete -C /opt/homebrew/bin/terraform terraform
